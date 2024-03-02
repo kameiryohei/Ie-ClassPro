@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import { Noto_Sans_JP } from "next/font/google";
 import "./globals.css";
-import Header from "./components/Header";
+import Header from "./components/layout/Header";
 
 const font = Noto_Sans_JP({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Ie-ClassPro",
+  title: "Ie-ClassPlanner",
   description: "みんなの履修プランを共有しよう！",
 };
 
