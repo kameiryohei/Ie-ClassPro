@@ -6,6 +6,8 @@ import { useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import type { Session } from "@supabase/auth-helpers-nextjs";
 import ProfileDrawer from "./ProfileDrawer";
+import { ModalType } from "./Modal/ModalType";
+import ModalCore from "./ModalCore";
 
 const Header = ({ session }: { session: Session | null }) => {
   const [isOpen, setOpen] = useState(false);
@@ -41,23 +43,18 @@ const Header = ({ session }: { session: Session | null }) => {
             >
               レビュー投稿
             </Link>
-            <Link
-              href="/profile"
-              className="font-medium text-gray-500 transition-colors hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-700"
-            >
-              プロフィール
-            </Link>
             {session ? (
-              <div>
-                <Link
-                  className="text-gray-600 hover:text-orange-500 duration-300"
-                  href="/profile"
-                >
-                  Profile表示できています
-                </Link>
-              </div>
+              <Link
+                className="text-gray-600 hover:text-orange-500 duration-300"
+                href="/profile"
+              >
+                マイページ
+              </Link>
             ) : (
-              <></>
+              <>
+                <ModalCore modalType={ModalType.SignIn}></ModalCore>
+                <ModalCore modalType={ModalType.SignUp}></ModalCore>
+              </>
             )}
             <Link href="/create">
               <Button>履修プランを投稿</Button>
