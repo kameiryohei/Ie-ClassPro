@@ -3,19 +3,25 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Sling as Hamburger } from "hamburger-react";
 import { useState } from "react";
-import Modal from "./Modal";
+import { usePathname, useRouter } from "next/navigation";
+import type { Session } from "@supabase/auth-helpers-nextjs";
+import ProfileDrawer from "./ProfileDrawer";
 
-const Header = () => {
+const Header = ({ session }: { session: Session | null }) => {
   const [isOpen, setOpen] = useState(false);
-
+  const pathname = usePathname();
+  const router = useRouter();
+  if (session === null && pathname?.includes("/profile")) {
+    router.push("/");
+  }
   return (
-    <div className="divide-y border-gray-300 dark:border-gray-800 border-b">
-      <div className="px-4 py-3 md:py-6 lg:px-6">
-        <div className="flex items-center space-y-2 md:space-y-0 md:space-x-6">
+    <div className="divide-y border-gray-300 dark:border-gray-800 border-b bg-white shadow-md">
+      <div className="px-4 py-6 items-center lg:px-6">
+        <div className="flex justify-between md:space-y-0 md:space-x-6">
           <Link href="/" className="text-2xl font-bold tracking-tighter mr-4">
             ClassPlanner
           </Link>
-          <nav className="space-x-6 text-sm hidden md:block">
+          <nav className="space-x-6 text-sm hidden lg:block">
             <Link
               href="/"
               className="font-medium text-gray-500 transition-colors hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-700"
@@ -23,12 +29,6 @@ const Header = () => {
               ホーム
             </Link>
 
-            <Link
-              href="/using"
-              className="font-medium text-gray-500 transition-colors hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-700"
-            >
-              使い方
-            </Link>
             <Link
               href="/login"
               className="font-medium text-gray-500 transition-colors hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-700"
@@ -41,48 +41,31 @@ const Header = () => {
             >
               レビュー投稿
             </Link>
+            <Link
+              href="/profile"
+              className="font-medium text-gray-500 transition-colors hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-700"
+            >
+              プロフィール
+            </Link>
+            {session ? (
+              <div>
+                <Link
+                  className="text-gray-600 hover:text-orange-500 duration-300"
+                  href="/profile"
+                >
+                  Profile表示できています
+                </Link>
+              </div>
+            ) : (
+              <></>
+            )}
             <Link href="/create">
               <Button>履修プランを投稿</Button>
             </Link>
           </nav>
-          <div className="block md:hidden">
+          <div className="block lg:hidden">
             <Hamburger toggled={isOpen} toggle={setOpen} />
-            <Modal isOpen={isOpen} onClose={() => setOpen(false)}>
-              <h1 className="text-2xl font-semibold text-center mb-4">
-                メニュー
-              </h1>
-              <nav
-                onClick={() => {
-                  setOpen(false);
-                }}
-                className="flex flex-col items-center space-y-3"
-              >
-                <Link
-                  href="/"
-                  className="text-gray-800 hover:text-orange-600 transition-colors"
-                >
-                  ホーム
-                </Link>
-                <Link
-                  href="/using"
-                  className="text-gray-800 hover:text-orange-600 transition-colors"
-                >
-                  使い方
-                </Link>
-                <Link
-                  href="/login"
-                  className="text-gray-800 hover:text-orange-600 transition-colors"
-                >
-                  ログイン・新規登録
-                </Link>
-                <Link
-                  href="/review"
-                  className="text-gray-800 hover:text-orange-600 transition-colors"
-                >
-                  レビュー投稿
-                </Link>
-              </nav>
-            </Modal>
+            <ProfileDrawer isOpen={isOpen} onClose={() => setOpen(false)} />
           </div>
         </div>
       </div>
