@@ -3,19 +3,13 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Sling as Hamburger } from "hamburger-react";
 import { useState } from "react";
-import { usePathname, useRouter } from "next/navigation";
-import type { Session } from "@supabase/auth-helpers-nextjs";
 import ProfileDrawer from "./ProfileDrawer";
-import { ModalType } from "./Modal/ModalType";
-import ModalCore from "./ModalCore";
+import useUser from "@/app/hooks/useUser";
 
-const Header = ({ session }: { session: Session | null }) => {
+const Header = () => {
   const [isOpen, setOpen] = useState(false);
-  const pathname = usePathname();
-  const router = useRouter();
-  if (session === null && pathname?.includes("/profile")) {
-    router.push("/");
-  }
+  const { session, user, signOut } = useUser();
+
   return (
     <div className="divide-y border-gray-300 dark:border-gray-800 border-b bg-white shadow-md">
       <div className="px-4 py-6 items-center lg:px-6">
@@ -32,30 +26,35 @@ const Header = ({ session }: { session: Session | null }) => {
             </Link>
 
             <Link
-              href="/login"
-              className="font-medium text-gray-500 transition-colors hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-700"
-            >
-              ログイン・新規登録
-            </Link>
-            <Link
-              href="/review"
+              href="/post/add"
               className="font-medium text-gray-500 transition-colors hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-700"
             >
               レビュー投稿
             </Link>
             {session ? (
               <Link
-                className="text-gray-600 hover:text-orange-500 duration-300"
                 href="/profile"
+                className="font-medium text-gray-500 transition-colors hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-700"
               >
                 マイページ
               </Link>
             ) : (
               <>
-                <ModalCore modalType={ModalType.SignIn}></ModalCore>
-                <ModalCore modalType={ModalType.SignUp}></ModalCore>
+                <Link
+                  href="/user/login"
+                  className="font-medium text-gray-500 transition-colors hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-700"
+                >
+                  ログイン
+                </Link>
+                <Link
+                  href="/user/register"
+                  className="font-medium text-gray-500 transition-colors hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-700"
+                >
+                  新規登録
+                </Link>
               </>
             )}
+
             <Link href="/create">
               <Button>履修プランを投稿</Button>
             </Link>

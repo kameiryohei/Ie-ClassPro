@@ -3,12 +3,14 @@ import { Dialog, Transition } from "@headlessui/react";
 import { IoClose } from "react-icons/io5";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import useUser from "@/app/hooks/useUser";
 interface ProfileDrawerProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
 const ProfileDrawer: React.FC<ProfileDrawerProps> = ({ isOpen, onClose }) => {
+  const { session } = useUser();
   return (
     <div>
       <Transition.Root show={isOpen} as={Fragment}>
@@ -43,7 +45,7 @@ const ProfileDrawer: React.FC<ProfileDrawerProps> = ({ isOpen, onClose }) => {
                             <button
                               onClick={onClose}
                               type="button"
-                              className="rounded-md bg-white text-gray-400 hover:text-gray-600 focus:ring-2 focus:outline-none focus:ring-sky-500 focus:ring-offset-2"
+                              className="rounded-md bg-white text-gray-400 hover:text-gray-600 focus:ring-2 focus:outline-none focus:ring-orange-500 focus:ring-offset-2"
                             >
                               <span className="sr-only">閉じる</span>
                               <IoClose size={30} />
@@ -67,23 +69,35 @@ const ProfileDrawer: React.FC<ProfileDrawerProps> = ({ isOpen, onClose }) => {
                               ホーム
                             </Link>
                             <Link
-                              href="/review"
+                              href="/post/add"
                               className="border-b-4 border-b-orange-500"
                             >
                               レビュー投稿
                             </Link>
-                            <Link
-                              href="/login"
-                              className="border-b-4 border-b-orange-500"
-                            >
-                              ログイン・新規登録
-                            </Link>
-                            <Link
-                              href="/profile"
-                              className="border-b-4 border-b-orange-500"
-                            >
-                              プロフィール
-                            </Link>
+                            {session ? (
+                              <Link
+                                href="/profile"
+                                className="border-b-4 border-b-orange-500"
+                              >
+                                プロフィール
+                              </Link>
+                            ) : (
+                              <>
+                                <Link
+                                  href="/user/login"
+                                  className="border-b-4 border-b-orange-500"
+                                >
+                                  ログイン
+                                </Link>
+                                <Link
+                                  href="/user/register"
+                                  className="border-b-4 border-b-orange-500"
+                                >
+                                  新規登録
+                                </Link>
+                              </>
+                            )}
+
                             <Button className="mt-3">
                               <Link href="/create">履修プランを投稿</Link>
                             </Button>

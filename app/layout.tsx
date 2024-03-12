@@ -3,7 +3,7 @@ import { Noto_Sans_JP } from "next/font/google";
 import "./globals.css";
 import Header from "./components/layout/Header";
 import Image from "next/image";
-import SupabaseListener from "./components/layout/SupabaseListener";
+import { Toaster } from "react-hot-toast";
 
 const font = Noto_Sans_JP({ subsets: ["latin"] });
 
@@ -20,15 +20,16 @@ export default function RootLayout({
   return (
     <html lang="ja">
       <body className={font.className}>
-        <SupabaseListener />
+        <Toaster />
         <div className={`fixed top-0 left-0 w-full h-screen z-[-1]`}>
           <Image
             src={`/images/bg.svg`}
             layout={`fill`}
             objectFit={`cover`}
-            alt={""}
+            alt={"背景画像"}
           />
         </div>
+        <Header />
         {children}
       </body>
     </html>

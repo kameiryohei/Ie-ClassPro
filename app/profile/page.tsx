@@ -1,18 +1,16 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
-import { useEffect } from "react";
+import useUser from "../hooks/useUser";
+import { useRouter } from "next/navigation";
 
 const Page = () => {
-  const supabase = createClientComponentClient();
-  useEffect(() => {
-    async function getData() {
-      const { data } = await supabase.auth.getSession();
-      console.log(data);
-    }
-    getData();
-  }, []);
+  const { signOut } = useUser();
+  const router = useRouter();
+  const logout = () => {
+    signOut();
+    router.push("/");
+  };
 
   return (
     <div className="mx-auto max-w-3xl lg:max-w-2xl px-4 sm:px-6 lg:px-8 pb-16 pt-20 text-center lg:pt-32">
@@ -29,9 +27,12 @@ const Page = () => {
         <Button className="mt-5">更新</Button>
 
         <div className="pt-10">
-          <form action="/api/auth/logout" method="post">
-            <Button type="submit">ログアウト</Button>
-          </form>
+          <Button
+            onClick={() => logout()}
+            className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-500"
+          >
+            ログアウト
+          </Button>
         </div>
       </div>
     </div>
