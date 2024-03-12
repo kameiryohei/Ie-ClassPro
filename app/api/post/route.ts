@@ -30,3 +30,23 @@ export const POST = async (req: Request, res: NextResponse) => {
     await prisma.$disconnect();
   }
 };
+export const DELETE = async (req: Request, res: NextResponse) => {
+  try {
+    const { postId } = await req.json();
+
+    await doConnect();
+    const post = await prisma.post.delete({
+      where: {
+        id: postId,
+      },
+    });
+    return NextResponse.json(
+      { message: "Deleted successfully", post },
+      { status: 200 }
+    );
+  } catch (error) {
+    return NextResponse.json({ message: "Error", error }, { status: 500 });
+  } finally {
+    await prisma.$disconnect();
+  }
+};
