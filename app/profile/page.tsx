@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import useUser from "../hooks/useUser";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 const Page = () => {
   const { signOut } = useUser();
@@ -24,13 +25,14 @@ const Page = () => {
           <p className="font-light m-4">学部名:</p>
           <Input type="text" className="shadow-lg" />
         </div>
-        <Button className="mt-5">更新</Button>
-
-        <div className="pt-10">
-          <Button
-            onClick={() => logout()}
-            className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-500"
-          >
+        <div className="mt-5 space-x-12">
+          <Button>更新</Button>
+          <Button>
+            <Link href="/post">自分の投稿を見る</Link>
+          </Button>
+        </div>
+        <div>
+          <Button onClick={() => logout()} className="mt-5">
             ログアウト
           </Button>
         </div>

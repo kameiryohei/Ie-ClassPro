@@ -8,7 +8,6 @@ import { useRouter } from "next/navigation";
 export default function useUser() {
   const [session, setSession] = useState<Session | null>(null);
   const [user, setUser] = useState<UserType | null>(null);
-  const router = useRouter();
 
   useEffect(() => {
     const { data: authListener } = supabase.auth.onAuthStateChange(

@@ -51,7 +51,10 @@ const AddPostPage = () => {
     return (
       <main className="flex justify-center items-center h-screen">
         <p>
-          <Link href="/user/login" className="text-blue-500 hover:underline">
+          <Link
+            href="/user/login"
+            className="text-2xl text-blue-500 hover:underline"
+          >
             ログインすることで投稿できます！
           </Link>
         </p>
