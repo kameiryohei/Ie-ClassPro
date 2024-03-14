@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import { Session } from "@supabase/supabase-js";
 import { supabase } from "@/utils/supabase/supabase";
 import { UserType } from "../types/userId";
-import { useRouter } from "next/navigation";
 
 export default function useUser() {
   const [session, setSession] = useState<Session | null>(null);

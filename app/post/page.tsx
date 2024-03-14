@@ -25,7 +25,6 @@ const AddPostPage = () => {
       }
 
       const data = await response.json();
-      console.log(data.message); // 成功メッセージを表示
       toast.success("投稿を削除しました");
       router.push("/");
     } catch (error) {

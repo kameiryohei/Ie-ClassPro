@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server";
 import { PrismaClient } from "@prisma/client";
 import prisma from "@/utils/prisma/prismaClient";
-import toast from "react-hot-toast";
 
 export async function dbConnect() {
   try {
