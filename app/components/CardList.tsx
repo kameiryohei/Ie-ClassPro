@@ -10,7 +10,7 @@ import Link from "next/link";
 const CardList = () => {
   return (
     <div>
-      <Card className="w-[350px]">
+      <Card className="">
         <CardHeader>
           <CardTitle>履修プラン名</CardTitle>
           <CardDescription>学部名：〇〇学部</CardDescription>

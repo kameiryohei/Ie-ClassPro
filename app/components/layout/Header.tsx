@@ -31,6 +31,12 @@ const Header = () => {
             >
               レビュー投稿
             </Link>
+            <Link
+              href="/allPost"
+              className="font-medium text-gray-500 transition-colors hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-700"
+            >
+              すべての投稿を見る
+            </Link>
             {session ? (
               <Link
                 href="/profile"
