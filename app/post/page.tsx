@@ -38,9 +38,9 @@ const AddPostPage = () => {
     return (
       <main className="flex justify-center items-center h-screen">
         <p>
-          <a href="/user/login" className="text-blue-500 hover:underline">
-            ログインしてね！
-          </a>
+          <Link href="/user/login" className="text-blue-500 hover:underline">
+            ここをクリックしてログインしてください
+          </Link>
         </p>
       </main>
     );

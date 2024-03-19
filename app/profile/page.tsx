@@ -5,7 +5,13 @@ import useUser from "../hooks/useUser";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import toast from "react-hot-toast";
-import { useRef } from "react";
+import { z } from "zod";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+
+const formSchema = z.object({
+  name: z.string().min(1, "ユーザー名は1文字以上で入力してください。"),
+});
 
 const EditUsername = async (name: string, auth_id: string) => {
   const res = await fetch("/api/user/update", {
@@ -22,16 +28,26 @@ const EditUsername = async (name: string, auth_id: string) => {
 const Page = () => {
   const { signOut, session, user } = useUser();
   const router = useRouter();
-  const nameRef = useRef<HTMLInputElement>(null);
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      name: user?.name || "",
+    },
+  });
+
   const logout = () => {
     signOut();
     router.push("/");
   };
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
 
-    if (nameRef.current && session?.user?.id) {
-      const res = await EditUsername(nameRef.current.value, session.user.id);
+  const onSubmit = async (data: { name: string }) => {
+    if (session?.user?.id) {
+      const res = await EditUsername(data.name, session.user.id);
       if (res.message === "Deleted successfully") {
         toast.success("更新しました");
         router.push("/");
@@ -39,7 +55,7 @@ const Page = () => {
         toast.error("更新に失敗しました");
       }
     } else {
-      console.error("nameRef.current or session.user.id is null");
+      console.error("session.user.id is null");
     }
   };
 
@@ -52,17 +68,19 @@ const Page = () => {
           <p>登録メールアドレス：{user?.email}</p>
         </div>
 
-        <form
-          onSubmit={handleSubmit}
-          className="flex justify-center space-x-6 py-3"
-        >
-          <Input
-            type="text"
-            ref={nameRef}
-            placeholder="名前を変更する場合は入力してください"
-            className="w-1/2 text-center placeholder:text-center placeholder:text-gray-500"
-          />
-          <Button>更新</Button>
+        <form onSubmit={handleSubmit(onSubmit)} className="py-2">
+          <div className="flex justify-center gap-6 py-2">
+            <Input
+              {...register("name")}
+              type="text"
+              placeholder="名前を変更する場合は入力してください"
+              className="w-1/2 text-center placeholder:text-center placeholder:text-gray-500"
+            />
+            <Button>更新</Button>
+          </div>
+          {errors.name && (
+            <p className="text-red-600 mt-4">{errors.name.message}</p>
+          )}
         </form>
 
         <div className="mt-5 space-x-12">
