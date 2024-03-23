@@ -5,7 +5,8 @@ import prisma from "@/utils/prisma/prismaClient";
 // username更新用API
 export const PUT = async (req: Request, res: NextResponse) => {
   try {
-    const { name, auth_id } = await req.json();
+    const { name, auth_id, university, faculty, department, grade } =
+      await req.json();
     await doConnect();
     const post = await prisma.user.update({
       data: {
@@ -13,6 +14,10 @@ export const PUT = async (req: Request, res: NextResponse) => {
       },
       where: {
         auth_id,
+        university,
+        faculty,
+        department,
+        grade,
       },
     });
 
