@@ -1,0 +1,163 @@
+"use client";
+import useUser from "@/app/hooks/useUser";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "next/navigation";
+import React from "react";
+import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
+import { z } from "zod";
+import { FormData } from "./types/EditType";
+
+const EditProfile = async (
+  name: string,
+  auth_id: string,
+  university: string,
+  faculty: string,
+  department: string,
+  grade: number
+) => {
+  const res = await fetch("/api/user/update", {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      name,
+      auth_id,
+      university,
+      faculty,
+      department,
+      grade,
+    }),
+  });
+  const data = await res.json();
+  return data;
+};
+const formSchema = z.object({
+  name: z.string().min(1, "ユーザー名は1文字以上で入力してください。"),
+  university: z.string().min(1, "大学名は1文字以上で入力してください。"),
+  faculty: z.string().min(1, "学部名は1文字以上で入力してください。"),
+  department: z.string().min(1, "学科名は1文字以上で入力してください。"),
+  grade: z.string().min(1, "学年は1文字以上で入力してください。"),
+});
+
+const EditPage = () => {
+  const { user, session } = useUser();
+  const router = useRouter();
+  const onSubmit = async (data: FormData) => {
+    if (session?.user?.id) {
+      const res = await EditProfile(
+        data.name,
+        session.user.id,
+        data.university,
+        data.faculty,
+        data.department,
+        typeof data.grade === "string" ? parseInt(data.grade) : data.grade // gradeをnumberに変換
+      );
+      if (res.message === "Updated successfully") {
+        toast.success("プロフィールを更新しました");
+        router.push("/profile");
+      } else {
+        toast.error("プロフィールの更新に失敗しました");
+        console.error(res);
+      }
+    } else {
+      console.error("session.user.id is null");
+    }
+  };
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      name: user?.name || "",
+      university: user?.university || "",
+      faculty: user?.faculty || "",
+      department: user?.department || "",
+      grade: user?.grade || "",
+    },
+  });
+  return (
+    <div className="">
+      <h1 className="text-2xl font-bold text-center mt-10">ユーザー情報変更</h1>
+      <div className="flex justify-center">
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <div className="mt-3">
+            <Input
+              {...register("name")}
+              type="text"
+              placeholder="名前を変更する場合は入力してください"
+              className="text-center placeholder:text-center placeholder:text-gray-500"
+            />
+            {errors.name && (
+              <p className="text-red-600 mt-4 text-center">
+                {errors.name.message}
+              </p>
+            )}
+          </div>
+          <div className="mt-3">
+            <Input
+              {...register("university")}
+              type="text"
+              placeholder="大学名を変更する場合は入力してください"
+              className="text-center placeholder:text-center placeholder:text-gray-500"
+            />
+            {errors.university && (
+              <p className="text-red-600 mt-4 text-center">
+                {errors.university.message}
+              </p>
+            )}
+          </div>
+          <div className="mt-3">
+            <Input
+              {...register("faculty")}
+              type="text"
+              placeholder="学部名を変更する場合は入力してください"
+              className="text-center placeholder:text-center placeholder:text-gray-500"
+            />
+            {errors.faculty && (
+              <p className="text-red-600 mt-4 text-center">
+                {errors.faculty.message}
+              </p>
+            )}
+          </div>
+          <div className="mt-3">
+            <Input
+              {...register("department")}
+              type="text"
+              placeholder="学科名を変更する場合は入力してください"
+              className="text-center placeholder:text-center placeholder:text-gray-500"
+            />
+            {errors.department && (
+              <p className="text-red-600 mt-4 text-center">
+                {errors.department.message}
+              </p>
+            )}
+          </div>
+          <div className="mt-3">
+            <Input
+              {...register("grade")}
+              type="text"
+              placeholder="学年を変更する場合は入力してください"
+              className="text-center placeholder:text-center placeholder:text-gray-500"
+            />
+            {errors.grade && (
+              <p className="text-red-600 mt-4 text-center">
+                {errors.grade.message}
+              </p>
+            )}
+          </div>
+
+          <Button className="mt-3">更新</Button>
+        </form>
+      </div>
+    </div>
+  );
+};
+
+export default EditPage;

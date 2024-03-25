@@ -11,18 +11,18 @@ export const PUT = async (req: Request, res: NextResponse) => {
     const post = await prisma.user.update({
       data: {
         name,
-      },
-      where: {
-        auth_id,
         university,
         faculty,
         department,
         grade,
       },
+      where: {
+        auth_id,
+      },
     });
 
     return NextResponse.json(
-      { message: "Deleted successfully", post },
+      { message: "Updated successfully", post },
       { status: 201 }
     );
   } catch (error) {
