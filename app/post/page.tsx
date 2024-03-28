@@ -73,7 +73,7 @@ const AddPostPage = () => {
       )}
       <Link
         href="/"
-        className="text-blue-500 text-2xl font-semibold hover:underline mt-8 flex justify-center"
+        className="text-blue-500 text-2xl font-semibold hover:underline mt-8 text-center block"
       >
         戻る
       </Link>

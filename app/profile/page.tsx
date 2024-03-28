@@ -20,7 +20,7 @@ const Page = () => {
         <div className="flex flex-col gap-y-2 text-lg font-medium">
           <p>ユーザー名：{user?.name}</p>
           <p>登録メールアドレス：{user?.email}</p>
-          <p>所属大学名：{user?.university}</p>
+          <p>所属学校名：{user?.university}</p>
           <p>学部名：{user?.faculty}</p>
           <p>学科名：{user?.department}</p>
           <p>学年：{user?.grade}年</p>
