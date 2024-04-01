@@ -43,7 +43,6 @@ const PlanCreate = () => {
           "Content-Type": "application/json",
         },
       });
-      console.log(res);
       router.push("/create/create-plan");
     } catch (error) {
       console.error("Error:", error);
