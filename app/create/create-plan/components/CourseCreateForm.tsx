@@ -7,10 +7,13 @@ import toast from "react-hot-toast";
 import { Button } from "@/components/ui/button";
 
 const CourseCreateForm = () => {
-  const [forms, setForms] = useState([{ key: 1 }, { key: 2 }]);
+  const [forms, setForms] = useState([
+    { key: 1, name: "", description: "" },
+    { key: 2, name: "", description: "" },
+  ]);
 
   const addForm = () => {
-    setForms([...forms, { key: Date.now() }]);
+    setForms([...forms, { key: Date.now(), name: "", description: "" }]);
   };
 
   const removeForm = (key: number) => {
@@ -27,28 +30,56 @@ const CourseCreateForm = () => {
     }
   };
 
+  const handleSubmit = () => {
+    const courses = forms.map((form) => ({
+      name: form.name,
+      description: form.description,
+    }));
+    console.log(courses);
+  };
+
   return (
-    <div className="flex flex-col items-center gap-3">
+    <div className="pt-4 flex flex-col items-center gap-3">
       {forms.map((form) => (
         <div
           key={form.key}
-          className="px-8 py-3 flex justify-center gap-3 bg-slate-100 rounded-2xl shadow-2xl"
+          className="px-8 py-3 flex justify-center flex-col lg:flex-row gap-3 bg-slate-100 rounded-2xl shadow-2xl"
         >
-          <div className="flex flex-col w-[500px]">
+          <div className="flex flex-col lg:w-[500px]">
             <Input
               type="text"
               placeholder="教科名を入力してください"
               className="mt-2 text-center placeholder:text-center placeholder:text-gray-500"
+              value={form.name}
+              onChange={(e) => {
+                const updatedForms = forms.map((f) => {
+                  if (f.key === form.key) {
+                    return { ...f, name: e.target.value };
+                  }
+                  return f;
+                });
+                setForms(updatedForms);
+              }}
             />
             <Input
               type="text"
               placeholder="教科内容を入力してください"
               className="mt-2 text-center placeholder:text-center placeholder:text-gray-500"
+              value={form.description}
+              onChange={(e) => {
+                const updatedForms = forms.map((f) => {
+                  if (f.key === form.key) {
+                    return { ...f, description: e.target.value };
+                  }
+                  return f;
+                });
+                setForms(updatedForms);
+              }}
             />
           </div>
           <button
             onClick={() => removeForm(form.key)}
-            className="mt-4 bg-red-500 hover:bg-red-400 transition-colors text-white py-2 px-4 rounded-md"
+            className="bg-red-500 hover:bg-red-400 transition-colors text-white py-2 px-4 rounded-md"
           >
             削除
           </button>
@@ -63,7 +94,7 @@ const CourseCreateForm = () => {
         />
       </div>
       <div className="pt-3">
-        <Button>保存</Button>
+        <Button onClick={handleSubmit}>保存</Button>
       </div>
     </div>
   );
