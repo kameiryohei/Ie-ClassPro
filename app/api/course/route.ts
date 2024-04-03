@@ -1,6 +1,6 @@
 import prisma from "@/utils/prisma/prismaClient";
 import { NextResponse } from "next/server";
-import { doConnect } from "../plan/route";
+import { doConnect } from "../post/route";
 
 export const POST = async (req: Request, res: NextResponse) => {
   try {

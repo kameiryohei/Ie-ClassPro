@@ -3,6 +3,7 @@ import { IoIosAddCircleOutline } from "react-icons/io";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
 
 type CourseCreateFormProps = {
   planId: number | null;
@@ -13,6 +14,7 @@ const CourseCreateForm: React.FC<CourseCreateFormProps> = ({ planId }) => {
     { key: 1, name: "", description: "" },
     { key: 2, name: "", description: "" },
   ]);
+  const router = useRouter();
 
   const addForm = () => {
     setForms([...forms, { key: Date.now(), name: "", description: "" }]);
@@ -51,6 +53,7 @@ const CourseCreateForm: React.FC<CourseCreateFormProps> = ({ planId }) => {
         throw new Error("エラーが発生しました");
       }
       toast.success("教科を保存しました");
+      router.push("/");
     } catch (error) {
       console.error("Error:", error);
       toast.error("エラーが発生しました。もう一度お試しください。");
