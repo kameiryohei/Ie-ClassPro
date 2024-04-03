@@ -9,7 +9,7 @@ import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import useUser from "../hooks/useUser";
 
-interface PlanTittleProps {
+interface PlanTittleTypes {
   title: string;
   description: string;
 }
@@ -26,11 +26,11 @@ const PlanCreate = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<PlanTittleProps>({
+  } = useForm<PlanTittleTypes>({
     resolver: zodResolver(schema),
   });
 
-  const onSubmit = async (data: PlanTittleProps) => {
+  const onSubmit = async (data: PlanTittleTypes) => {
     try {
       const res = await fetch("/api/plan", {
         method: "POST",
@@ -43,10 +43,13 @@ const PlanCreate = () => {
           "Content-Type": "application/json",
         },
       });
+      if (!res.ok) {
+        throw new Error("エラーが発生しました");
+      }
       const responseJson = await res.json();
       const planId = responseJson.planId;
       const params = new URLSearchParams();
-      params.append("planId", planId.toString());
+      params.append("planId", planId());
       const href = `/create/create-plan?${params}`;
       router.push(href);
     } catch (error) {

@@ -4,7 +4,7 @@ import CourseCreateForm from "./components/CourseCreateForm";
 
 const CourseCreate = () => {
   const params = useSearchParams();
-  const planId = params.get("planId");
+  const planId = Number(params.get("planId"));
 
   return (
     <div>
