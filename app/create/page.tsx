@@ -49,7 +49,7 @@ const PlanCreate = () => {
       const responseJson = await res.json();
       const planId = responseJson.planId;
       const params = new URLSearchParams();
-      params.append("planId", planId());
+      params.append("planId", planId.toString());
       const href = `/create/create-plan?${params}`;
       router.push(href);
     } catch (error) {
