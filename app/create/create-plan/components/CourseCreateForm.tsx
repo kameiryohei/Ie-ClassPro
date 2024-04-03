@@ -1,12 +1,15 @@
 "use client";
-
 import { Input } from "@/components/ui/input";
 import { IoIosAddCircleOutline } from "react-icons/io";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { Button } from "@/components/ui/button";
 
-const CourseCreateForm = () => {
+type CourseCreateFormProps = {
+  planId: string | null;
+};
+
+const CourseCreateForm: React.FC<CourseCreateFormProps> = ({ planId }) => {
   const [forms, setForms] = useState([
     { key: 1, name: "", description: "" },
     { key: 2, name: "", description: "" },
@@ -30,16 +33,30 @@ const CourseCreateForm = () => {
     }
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     const courses = forms.map((form) => ({
       name: form.name,
       description: form.description,
     }));
-    console.log(courses);
+    try {
+      const res = await fetch("/api/course", {
+        method: "POST",
+        body: JSON.stringify({ courses }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      console.log(res);
+      toast.success("教科を保存しました");
+    } catch (error) {
+      console.error("Error:", error);
+      toast.error("エラーが発生しました。もう一度お試しください。");
+    }
   };
 
   return (
     <div className="pt-4 flex flex-col items-center gap-3">
+      <p className="text-center text-red-500">{planId}</p>
       {forms.map((form) => (
         <div
           key={form.key}

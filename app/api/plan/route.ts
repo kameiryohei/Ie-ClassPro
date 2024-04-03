@@ -21,7 +21,10 @@ export const POST = async (req: Request, res: NextResponse) => {
         userId,
       },
     });
-    return NextResponse.json({ message: "Success", post }, { status: 202 });
+    return NextResponse.json(
+      { message: "Success", post, planId: post.id },
+      { status: 202 }
+    );
   } catch (error) {
     return NextResponse.json({ message: "Error", error }, { status: 501 });
   } finally {

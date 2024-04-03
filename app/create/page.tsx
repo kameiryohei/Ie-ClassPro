@@ -43,7 +43,12 @@ const PlanCreate = () => {
           "Content-Type": "application/json",
         },
       });
-      router.push("/create/create-plan");
+      const responseJson = await res.json();
+      const planId = responseJson.planId;
+      const params = new URLSearchParams();
+      params.append("planId", planId.toString());
+      const href = `/create/create-plan?${params}`;
+      router.push(href);
     } catch (error) {
       console.error("Error:", error);
       toast.error("エラーが発生しました。もう一度お試しください。");
