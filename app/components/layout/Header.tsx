@@ -8,10 +8,10 @@ import useUser from "@/app/hooks/useUser";
 
 const Header = () => {
   const [isOpen, setOpen] = useState(false);
-  const { session, user, signOut } = useUser();
+  const { session } = useUser();
 
   return (
-    <div className="divide-y border-gray-300 dark:border-gray-800 border-b bg-white shadow-md">
+    <div className="fixed top-0 w-full divide-y border-gray-300 dark:border-gray-800 border-b bg-white shadow-md">
       <div className="px-4 py-6 items-center lg:px-6">
         <div className="flex justify-between md:space-y-0 md:space-x-6">
           <Link href="/" className="text-2xl font-bold tracking-tighter mr-4">

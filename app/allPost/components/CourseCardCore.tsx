@@ -18,10 +18,11 @@ async function getAllCoursesDate() {
 const CourseCardCore = async () => {
   const AllCourseDate = await getAllCoursesDate();
   return (
-    <div className="mt-4 grid gap-5 lg:grid-cols-3">
+    <div className="mt-4 grid gap-5 grid-cols-1 lg:grid-cols-3">
       {AllCourseDate.map((course: Course) => (
         <CardList
           key={course.id}
+          id={course.id}
           tittle={course.title}
           content={course.content}
           userId={course.userId}
