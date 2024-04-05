@@ -1,12 +1,11 @@
 import prisma from "@/utils/prisma/prismaClient";
 import { NextResponse } from "next/server";
-import { doConnect } from "../post/route";
 
 export const POST = async (req: Request, res: NextResponse) => {
   try {
     const { courses, planId } = await req.json();
 
-    await doConnect();
+    await prisma.$connect();
 
     const post = await prisma.course.createMany({
       data: courses.map((course: { name: string; content: string }) => ({

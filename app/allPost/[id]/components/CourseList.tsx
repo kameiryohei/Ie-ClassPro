@@ -15,8 +15,8 @@ const CourseList: React.FC<CourseListProps> = ({ name, content }) => {
     <div className="">
       <Accordion type="single" collapsible>
         <AccordionItem value="item-1">
-          <AccordionTrigger>{name}</AccordionTrigger>
-          <AccordionContent>{content}</AccordionContent>
+          <AccordionTrigger>科目名：{name}</AccordionTrigger>
+          <AccordionContent>内容：{content}</AccordionContent>
         </AccordionItem>
       </Accordion>
     </div>

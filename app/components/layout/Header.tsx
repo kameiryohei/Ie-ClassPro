@@ -12,8 +12,8 @@ const Header = () => {
 
   return (
     <div className="fixed top-0 w-full divide-y border-gray-300 dark:border-gray-800 border-b bg-white shadow-md">
-      <div className="px-4 py-6 items-center lg:px-6">
-        <div className="flex justify-between md:space-y-0 md:space-x-6">
+      <div className="px-8 py-6 items-center lg:px-6">
+        <div className="flex justify-between items-center md:space-y-0 md:space-x-6">
           <Link href="/" className="text-2xl font-bold tracking-tighter mr-4">
             ClassPlanner
           </Link>
@@ -38,12 +38,17 @@ const Header = () => {
               すべての投稿を見る
             </Link>
             {session ? (
-              <Link
-                href="/profile"
-                className="font-medium text-gray-500 transition-colors hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-700"
-              >
-                マイページ
-              </Link>
+              <>
+                <Link
+                  href="/profile"
+                  className="font-medium text-gray-500 transition-colors hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-700"
+                >
+                  マイページ
+                </Link>
+                <Button>
+                  <Link href="/create">履修プランを投稿</Link>
+                </Button>
+              </>
             ) : (
               <>
                 <Link
@@ -60,10 +65,6 @@ const Header = () => {
                 </Link>
               </>
             )}
-
-            <Link href="/create">
-              <Button>履修プランを投稿</Button>
-            </Link>
           </nav>
           <div className="block lg:hidden">
             <Hamburger toggled={isOpen} toggle={setOpen} />

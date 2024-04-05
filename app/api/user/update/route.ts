@@ -1,5 +1,4 @@
 import { NextResponse } from "next/server";
-import { doConnect } from "../../post/route";
 import prisma from "@/utils/prisma/prismaClient";
 
 // username更新用API
@@ -7,7 +6,7 @@ export const PUT = async (req: Request, res: NextResponse) => {
   try {
     const { name, auth_id, university, faculty, department, grade } =
       await req.json();
-    await doConnect();
+    await prisma.$connect();
     const post = await prisma.user.update({
       data: {
         name,
@@ -36,7 +35,7 @@ export const PUT = async (req: Request, res: NextResponse) => {
 export const DELETE = async (req: Request, res: NextResponse) => {
   try {
     const { auth_id } = await req.json();
-    await doConnect();
+    await prisma.$connect();
     await prisma.user.delete({
       where: {
         auth_id,

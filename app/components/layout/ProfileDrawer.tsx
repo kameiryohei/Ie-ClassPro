@@ -74,13 +74,24 @@ const ProfileDrawer: React.FC<ProfileDrawerProps> = ({ isOpen, onClose }) => {
                             >
                               レビュー投稿
                             </Link>
+                            <Link
+                              href="/allPost"
+                              className="border-b-4 border-b-orange-500"
+                            >
+                              全ての投稿を見る
+                            </Link>
                             {session ? (
-                              <Link
-                                href="/profile"
-                                className="border-b-4 border-b-orange-500"
-                              >
-                                プロフィール
-                              </Link>
+                              <>
+                                <Link
+                                  href="/profile"
+                                  className="border-b-4 border-b-orange-500"
+                                >
+                                  プロフィール
+                                </Link>
+                                <Button className="mt-3">
+                                  <Link href="/create">履修プランを投稿</Link>
+                                </Button>
+                              </>
                             ) : (
                               <>
                                 <Link
@@ -97,10 +108,6 @@ const ProfileDrawer: React.FC<ProfileDrawerProps> = ({ isOpen, onClose }) => {
                                 </Link>
                               </>
                             )}
-
-                            <Button className="mt-3">
-                              <Link href="/create">履修プランを投稿</Link>
-                            </Button>
                           </nav>
                         </div>
                       </div>

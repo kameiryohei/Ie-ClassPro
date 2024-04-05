@@ -1,21 +1,12 @@
 import { NextResponse } from "next/server";
-import { PrismaClient } from "@prisma/client";
-
-export const prisma = new PrismaClient() as any;
-export async function doConnect() {
-  try {
-    await prisma.$connect();
-  } catch (error) {
-    return Error("DB接続に失敗しました");
-  }
-}
+import prisma from "@/utils/prisma/prismaClient";
 
 // post投稿用API
 export const POST = async (req: Request, res: NextResponse) => {
   try {
     const { title, content, authorId } = await req.json();
 
-    await doConnect();
+    await prisma.$connect();
     const post = await prisma.post.create({
       data: {
         title,
@@ -34,7 +25,7 @@ export const DELETE = async (req: Request, res: NextResponse) => {
   try {
     const { postId } = await req.json();
 
-    await doConnect();
+    await prisma.$connect();
     const post = await prisma.post.delete({
       where: {
         id: postId,

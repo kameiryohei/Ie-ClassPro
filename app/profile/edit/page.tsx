@@ -93,7 +93,7 @@ const EditPage = () => {
     setValue("university", user?.university || "");
     setValue("faculty", user?.faculty || "");
     setValue("department", user?.department || "");
-    setValue("grade", user?.grade.toString() || ""); // gradeはstringに変換
+    setValue("grade", user?.grade?.toString() || ""); // gradeはstringに変換
   }, [user, setValue]);
 
   return (

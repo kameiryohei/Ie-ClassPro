@@ -54,6 +54,7 @@ const CourseCreateForm: React.FC<CourseCreateFormProps> = ({ planId }) => {
       }
       toast.success("教科を保存しました");
       router.push("/");
+      router.refresh();
     } catch (error) {
       console.error("Error:", error);
       toast.error("エラーが発生しました。もう一度お試しください。");
