@@ -59,48 +59,50 @@ const PlanCreate = () => {
   };
 
   return (
-    <div className="mx-auto text-3xl max-w-3xl lg:max-w-2xl px-4 sm:px-6 lg:px-8 pb-16 pt-20 text-center lg:pt-32">
-      <h1>始めに履修プランのタイトルと内容を書いてください。</h1>
-      <div className="py-3">
-        <Label htmlFor="title" className="text-lg font-light">
-          タイトル
-        </Label>
-        <Input
-          {...register("title")}
-          type="text"
-          id="title"
-          placeholder="タイトル"
-          className="mt-3 bg-slate-50 shadow-lg w-full px-4 py-4"
-        />
-        {errors.title && (
-          <span className="text-red-500 text-center text-base">
-            {errors.title.message?.toString()}
-          </span>
-        )}
-
-        <div className="py-2 grid w-full gap-1.5">
-          <Label htmlFor="description" className="text-lg font-light">
-            内容
+    <div className="mx-auto text-3xl max-w-3xl lg:max-w-2xl px-2 sm:px-4 lg:px-6 pb-16 pt-24 text-center lg:pt-32">
+      <div className="bg-slate-100 rounded-xl px-4 py-5 shadow-2xl">
+        <h1>始めに履修プランのタイトルと内容を書いてください。</h1>
+        <div className="py-3">
+          <Label htmlFor="title" className="text-lg font-light">
+            タイトル
           </Label>
-          <Textarea
-            {...register("description")}
-            placeholder="履修プランの説明を簡単に書いてください"
-            id="description"
-            className="mt-3 resize-none h-32 w-full bg-slate-50 px-4 py-4 shadow-lg"
+          <Input
+            {...register("title")}
+            type="text"
+            id="title"
+            placeholder="タイトル"
+            className="mt-3 bg-slate-50 shadow-lg w-full px-4 py-4"
           />
-          {errors.description && (
+          {errors.title && (
             <span className="text-red-500 text-center text-base">
-              {errors.description.message?.toString()}
+              {errors.title.message?.toString()}
             </span>
           )}
-          <div className="">
-            <button
-              type="submit"
-              className="p-3 text-sm bg-orange-500 rounded-2xl text-white w-full shadow-lg hover:bg-orange-600 transition-colors duration-300"
-              onClick={handleSubmit(onSubmit)}
-            >
-              次へ
-            </button>
+
+          <div className="py-2 grid w-full gap-1.5">
+            <Label htmlFor="description" className="text-lg font-light">
+              内容
+            </Label>
+            <Textarea
+              {...register("description")}
+              placeholder="履修プランの説明を簡単に書いてください"
+              id="description"
+              className="mt-3 resize-none h-32 w-full bg-slate-50 px-4 py-4 shadow-lg"
+            />
+            {errors.description && (
+              <span className="text-red-500 text-center text-base">
+                {errors.description.message?.toString()}
+              </span>
+            )}
+            <div className="pt-3">
+              <button
+                type="submit"
+                className="p-3 text-sm bg-orange-500 rounded-2xl text-white w-full shadow-lg hover:bg-orange-600 transition-colors duration-300"
+                onClick={handleSubmit(onSubmit)}
+              >
+                次へ
+              </button>
+            </div>
           </div>
         </div>
       </div>
