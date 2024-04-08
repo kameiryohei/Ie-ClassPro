@@ -11,7 +11,7 @@ const Header = () => {
   const { session } = useUser();
 
   return (
-    <div className="fixed top-0 w-full divide-y border-gray-300 dark:border-gray-800 border-b bg-white shadow-md">
+    <div className="fixed top-0 z-10 w-full divide-y border-gray-300 dark:border-gray-800 border-b bg-white shadow-md">
       <div className="px-8 py-6 items-center lg:px-6">
         <div className="flex justify-between items-center md:space-y-0 md:space-x-6">
           <Link href="/" className="text-2xl font-bold tracking-tighter mr-4">
