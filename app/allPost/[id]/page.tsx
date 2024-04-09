@@ -88,7 +88,7 @@ const page = async ({ params }: { params: { id: number } }) => {
         </span>
       </p>
       <div>
-        <CourseReview />
+        <CourseReview id={params.id} />
       </div>
     </div>
   );

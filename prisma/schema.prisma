@@ -29,8 +29,8 @@ model Post {
   published Boolean  @default(false)
   author    User?    @relation(fields: [authorId], references: [id])
   authorId  Int?
-  course    Course?  @relation(fields: [courseId], references: [id])
-  courseId  Int?
+  plan      Plan?    @relation(fields: [planId], references: [id])
+  planId    Int?
 }
 
 model Course {
@@ -39,7 +39,6 @@ model Course {
   content String? // 教科の内容
   planId  Int    // プランID
   plan    Plan   @relation(fields: [planId], references: [id])
-  posts   Post[]
 }
 
 model Plan {
@@ -49,4 +48,5 @@ model Plan {
   userId  Int      // ユーザーID
   user    User     @relation(fields: [userId], references: [id])
   courses Course[]
+  post   Post[]
 }
