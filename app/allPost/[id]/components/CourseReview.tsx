@@ -1,7 +1,6 @@
 "use client";
 import useUser from "@/app/hooks/useUser";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { SubmitHandler, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 
@@ -26,12 +25,12 @@ const CourseReview: React.FC<CourseReviewProps> = ({ id }) => {
     authorId: number;
   }> = async (data) => {
     try {
-      const res = await fetch("/api/post/", {
+      const res = await fetch("../api/post/coursepost/", {
         cache: "no-store", // ssr
         method: "POST",
         body: JSON.stringify({
           title: data.title,
-          id: id,
+          id: Number(id),
           authorId: user?.id,
         }),
         headers: {
