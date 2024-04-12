@@ -3,6 +3,7 @@ import CourseList from "./components/CourseList";
 import CourseReview from "./components/CourseReview";
 import { CourseType } from "./types/Course";
 import { IoArrowBackSharp } from "react-icons/io5";
+import ParticleReview from "./components/ParticleReview";
 
 async function getDetailData(id: number) {
   const res = await fetch(`http://localhost:3000//api/plan/${id}`, {
@@ -12,19 +13,19 @@ async function getDetailData(id: number) {
   return data;
 }
 
-const page = async ({ params }: { params: { id: number } }) => {
+const SpecificPage = async ({ params }: { params: { id: number } }) => {
   const CourseData = await getDetailData(params.id);
   const { title, content, user, courses } = CourseData;
   return (
     <>
-      <div className="px-14 md:px-36 relative">
+      <div className="py-8 px-14 md:px-36 relative">
         <Link href="/allPost">
           <IoArrowBackSharp
             size={36}
             className="absolute top-7 hover:ring-2 hover:ring-orange-500 rounded-full duration-200"
           />
         </Link>
-        <p className="pt-8 text-2xl font-semibold text-center">
+        <p className="text-2xl font-semibold text-center">
           <span className="border-b-4 border-orange-400 inline-block">
             履修プラン詳細
           </span>
@@ -88,12 +89,15 @@ const page = async ({ params }: { params: { id: number } }) => {
             レビュー
           </span>
         </p>
-      </div>
-      <div>
-        <CourseReview id={params.id} />
+        <div>
+          <CourseReview id={params.id} />
+        </div>
+        <div>
+          <ParticleReview id={params.id} />
+        </div>
       </div>
     </>
   );
 };
 
-export default page;
+export default SpecificPage;

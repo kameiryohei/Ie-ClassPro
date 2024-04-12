@@ -1,5 +1,6 @@
 "use client";
 import useUser from "@/app/hooks/useUser";
+import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { SubmitHandler, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
@@ -47,11 +48,11 @@ const CourseReview: React.FC<CourseReviewProps> = ({ id }) => {
 
   if (!session)
     return (
-      <main className="flex justify-center items-center h-screen">
+      <main className="flex justify-center pt-5">
         <p>
           <Link
             href="/user/login"
-            className="text-2xl text-blue-500 hover:underline"
+            className="p-3 text-base md:text-2xl bg-white rounded-xl ring-2 ring-gray-300 text-blue-500 hover:underline"
           >
             ログインすることで投稿できます！
           </Link>
@@ -61,14 +62,16 @@ const CourseReview: React.FC<CourseReviewProps> = ({ id }) => {
 
   return (
     <main className="max-w-md mx-auto p-6">
-      <p className="text-2xl font-bold mb-4">Add Post</p>
-
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <p className="md:text-2xl text-center font-bold mb-4">クチコミを投稿</p>
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="flex flex-col md:flex-row gap-4"
+      >
         <div className="mb-4">
           <input
             id="title"
             type="text"
-            placeholder="口コミを投稿"
+            placeholder="ここに入力してください"
             {...register("title", {
               required: {
                 value: true,
@@ -81,13 +84,7 @@ const CourseReview: React.FC<CourseReviewProps> = ({ id }) => {
             <div className="text-red-500 text-sm">{errors.title.message}</div>
           )}
         </div>
-
-        <button
-          type="submit"
-          className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-500"
-        >
-          追加
-        </button>
+        <Button type="submit">追加</Button>
       </form>
     </main>
   );
