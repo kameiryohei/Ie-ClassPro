@@ -4,7 +4,10 @@ type Course = {
   id: number;
   title: string;
   content: string;
-  userId: number;
+  user: {
+    name: string;
+    university: string;
+  };
 };
 
 async function getAllCoursesDate() {
@@ -25,7 +28,7 @@ const CourseCardCore = async () => {
           id={course.id}
           tittle={course.title}
           content={course.content}
-          userId={course.userId}
+          user={course.user}
         />
       ))}
     </div>

@@ -28,7 +28,16 @@ export const POST = async (req: Request, res: NextResponse) => {
 export const GET = async (req: Request, res: NextResponse) => {
   try {
     await prisma.$connect();
-    const posts = await prisma.plan.findMany();
+    const posts = await prisma.plan.findMany({
+      include: {
+        user: {
+          select: {
+            name: true,
+            university: true,
+          },
+        },
+      },
+    });
     return NextResponse.json({ message: "Success", posts });
   } catch (error) {
     return NextResponse.json({ message: "Error", error }, { status: 501 });

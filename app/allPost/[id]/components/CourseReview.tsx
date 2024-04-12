@@ -62,7 +62,7 @@ const CourseReview: React.FC<CourseReviewProps> = ({ id }) => {
 
   return (
     <main className="max-w-md mx-auto p-6">
-      <p className="md:text-2xl text-center font-bold mb-4">クチコミを投稿</p>
+      <p className="md:text-xl text-center font-bold mb-4">クチコミを投稿</p>
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="flex flex-col md:flex-row gap-4"

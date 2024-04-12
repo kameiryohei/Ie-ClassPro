@@ -12,10 +12,14 @@ interface CardListProps {
   id: number;
   tittle: string;
   content: string;
-  userId: number;
+  user: {
+    name: string;
+    university: string;
+  };
 }
 
-const CardList: React.FC<CardListProps> = ({ id, tittle, content, userId }) => {
+const CardList: React.FC<CardListProps> = ({ id, tittle, content, user }) => {
+  const { name, university } = user;
   return (
     <div className="border-2 rounded-xl border-slate-200  shadow-2xl">
       <Card>
@@ -23,7 +27,9 @@ const CardList: React.FC<CardListProps> = ({ id, tittle, content, userId }) => {
           <CardTitle className="overflow-ellipsis overflow-hidden whitespace-nowrap">
             タイトル：{tittle}
           </CardTitle>
-          <CardDescription>学部名:{userId}</CardDescription>
+          <CardDescription className="overflow-ellipsis overflow-hidden whitespace-nowrap">
+            作成者：{name} / 大学名:{university}
+          </CardDescription>
         </CardHeader>
         <CardContent className="overflow-ellipsis overflow-hidden whitespace-nowrap">
           説明：{content}
