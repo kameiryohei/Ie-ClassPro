@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { AuthError } from "@supabase/supabase-js";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import toast from "react-hot-toast";
 
 /**
  * パスワードリセット用画面

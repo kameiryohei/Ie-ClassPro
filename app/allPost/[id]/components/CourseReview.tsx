@@ -2,6 +2,7 @@
 import useUser from "@/app/hooks/useUser";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { SubmitHandler, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 
@@ -20,6 +21,7 @@ const CourseReview: React.FC<CourseReviewProps> = ({ id }) => {
     },
   });
   const { session, user } = useUser();
+  const router = useRouter();
 
   const onSubmit: SubmitHandler<{
     title: string;
@@ -40,6 +42,8 @@ const CourseReview: React.FC<CourseReviewProps> = ({ id }) => {
       });
       console.log(res);
       toast.success("投稿しました");
+      router.push("/allPost");
+      router.refresh();
     } catch (error) {
       console.error("Error:", error);
       toast.error("投稿に失敗しました");
