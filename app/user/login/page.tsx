@@ -3,6 +3,7 @@ import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import useUser from "@/app/hooks/useUser";
+import toast from "react-hot-toast";
 
 const Login = () => {
   const {
@@ -28,6 +29,7 @@ const Login = () => {
       setLoading(false);
 
       router.push("/");
+      toast.success("ログインしました");
     } catch (error) {}
   };
 

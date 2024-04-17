@@ -3,15 +3,18 @@ import { Button } from "@/components/ui/button";
 import useUser from "../hooks/useUser";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import toast from "react-hot-toast";
 
 const ProfilePage = () => {
   const { signOut, user } = useUser();
   const router = useRouter();
   const id = user?.id;
 
-  const logout = () => {
+  const logOut = () => {
     signOut();
+    toast.success("ログアウトしました");
     router.push("/");
+    router.refresh();
   };
 
   return (
@@ -45,7 +48,7 @@ const ProfilePage = () => {
           </button>
         </div>
         <div>
-          <Button onClick={logout} className="mt-5 bg-red-500">
+          <Button onClick={logOut} className="mt-5 bg-red-500">
             ログアウト
           </Button>
         </div>

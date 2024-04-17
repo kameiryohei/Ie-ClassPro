@@ -37,7 +37,7 @@ const SpecificCourseCore: React.FC<SpecificCourseDataProps> = ({
           説明：{content}
         </CardContent>
         <CardFooter>
-          <Link href={`/allPost/${id}`}>
+          <Link href={`/updatePlan/${id}`}>
             <p className="p-2 text-gray-700 hover:text-orange-400 duration-200">
               編集する
             </p>

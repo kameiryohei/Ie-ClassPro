@@ -30,7 +30,6 @@ const DeleteCourse: React.FC<DeleteCourseProps> = ({ planId }) => {
       router.refresh();
     } catch (error) {
       toast.error("投稿の削除に失敗しました");
-
       console.error(error);
     }
   };
