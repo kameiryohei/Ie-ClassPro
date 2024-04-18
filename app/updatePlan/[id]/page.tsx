@@ -2,13 +2,18 @@
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useEffect, useRef, useState } from "react";
-import EditCourse from "./EditCourse";
 import { CourseType } from "@/app/allPost/[id]/types/Course";
+import { Button } from "@/components/ui/button";
+import { IoIosAddCircleOutline } from "react-icons/io";
+import { IoArrowBackSharp } from "react-icons/io5";
+import { useRouter } from "next/navigation";
+import EditCorseList from "./EditCorseList";
 
 const UpdatePlanPage = ({ params }: { params: { id: number } }) => {
   const tittleRef = useRef<HTMLInputElement | null>(null);
   const contentRef = useRef<HTMLTextAreaElement | null>(null);
-  const [courses, setCourses] = useState([]);
+  const router = useRouter();
+  const [courses, setCourses] = useState<CourseType[]>([]);
 
   useEffect(() => {
     async function getDetailData(id: number) {
@@ -22,18 +27,25 @@ const UpdatePlanPage = ({ params }: { params: { id: number } }) => {
       setCourses(data.courses);
     });
   }, []);
+
   return (
-    <div className="py-8 px-14 md:px-36 relative">
-      <p className="text-base font-medium md:text-2xl text-center">
+    <div className="py-8 px-10 md:px-36 relative">
+      <IoArrowBackSharp
+        size={36}
+        className="absolute top-7 hover:ring-2 hover:ring-orange-500 rounded-full duration-200"
+        onClick={() => router.back()}
+      />
+
+      <p className="text-xl font-medium md:text-2xl text-center">
         プラン編集画面
       </p>
-      <div className="p-4 mt-4 flex flex-col gap-y-4 bg-slate-50 rounded-2xl shadow-2xl ring-2 ring-gray-300">
+      <div className="p-4 mt-4 flex flex-col gap-y-4 bg-slate-50 rounded-2xl shadow-2xl ring-2 ring-gray-400">
         <div className="flex flex-col gap-2">
           <p className="text-base font-medium md:text-xl text-center">
             ・履修プラン名
           </p>
           <Input
-            className="text-base md:text-xl text-center"
+            className="text-base md:text-xl text-center ring-2 ring-gray-300"
             type="text"
             ref={tittleRef}
           />
@@ -41,13 +53,18 @@ const UpdatePlanPage = ({ params }: { params: { id: number } }) => {
             ・履修プラン名
           </p>
           <Textarea
-            className="text-base md:text-xl text-center h-32"
+            className="text-base md:text-xl text-center h-32  ring-2 ring-gray-300"
             ref={contentRef}
           />
         </div>
-        <div className="p-4 mt-4 flex flex-col gap-y-4 bg-slate-50 rounded-2xl shadow-2xl ring-2 ring-gray-300">
+      </div>
+      <div className="p-4 flex flex-col gap-y-2 mt-4 bg-slate-50 rounded-2xl shadow-2xl ring-2 ring-gray-400">
+        <p className="text-base font-medium md:text-xl text-center">
+          ・教科一覧
+        </p>
+        <div className="grid lg:grid-cols-2 gap-4">
           {courses.map((course: CourseType) => (
-            <EditCourse
+            <EditCorseList
               key={course.id}
               id={course.id}
               name={course.name}
@@ -55,6 +72,16 @@ const UpdatePlanPage = ({ params }: { params: { id: number } }) => {
             />
           ))}
         </div>
+        <div className="flex justify-center items-center">
+          <span className="border-b-4 border-orange-500">
+            <p>教科を追加する</p>
+          </span>
+          <IoIosAddCircleOutline
+            size={38}
+            className="hover:size-12 duration-300"
+          />
+        </div>
+        <Button>保存</Button>
       </div>
     </div>
   );
