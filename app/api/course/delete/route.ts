@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import prisma from "@/utils/prisma/prismaClient";
+import { CourseType } from "@/app/allPost/[id]/types/Course";
 
 //編集画面で教科を削除するための関数　app/updatePlan/[id]/EditCorseList.tsxで使用
 export const DELETE = async (req: Request, res: NextResponse) => {
@@ -29,7 +30,7 @@ export const PUT = async (req: Request, res: NextResponse) => {
     const { courseId, name, content } = await req.json();
 
     await prisma.$connect();
-    const corseData = await prisma.course.update({
+    const courses = await prisma.course.update({
       where: {
         id: courseId,
       },
@@ -39,7 +40,7 @@ export const PUT = async (req: Request, res: NextResponse) => {
       },
     });
     return NextResponse.json(
-      { message: "Update successfully", corseData },
+      { message: "Updated successfully", courses },
       { status: 200 }
     );
   } catch (error) {

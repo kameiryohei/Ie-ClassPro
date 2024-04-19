@@ -3,11 +3,10 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useEffect, useRef, useState } from "react";
 import { CourseType } from "@/app/allPost/[id]/types/Course";
-import { Button } from "@/components/ui/button";
-import { IoIosAddCircleOutline } from "react-icons/io";
 import { IoArrowBackSharp } from "react-icons/io5";
 import { useRouter } from "next/navigation";
 import EditCorseList from "./EditCorseList";
+import AddCourse from "./components/AddCourse";
 
 const UpdatePlanPage = ({ params }: { params: { id: number } }) => {
   const tittleRef = useRef<HTMLInputElement | null>(null);
@@ -18,6 +17,7 @@ const UpdatePlanPage = ({ params }: { params: { id: number } }) => {
   useEffect(() => {
     async function getDetailData(id: number) {
       const res = await fetch(`http://localhost:3000//api/plan/update/${id}`);
+      method: "GET";
       const data = await res.json();
       return data;
     }
@@ -60,7 +60,7 @@ const UpdatePlanPage = ({ params }: { params: { id: number } }) => {
       </div>
       <div className="p-4 flex flex-col gap-y-2 mt-4 bg-slate-50 rounded-2xl shadow-2xl ring-2 ring-gray-400">
         <p className="text-base font-medium md:text-xl text-center">
-          ・教科一覧
+          ・現在登録中の教科一覧
         </p>
         <div className="grid lg:grid-cols-2 gap-4">
           {courses.map((course: CourseType) => (
@@ -72,16 +72,11 @@ const UpdatePlanPage = ({ params }: { params: { id: number } }) => {
             />
           ))}
         </div>
-        <div className="flex justify-center items-center">
-          <span className="border-b-4 border-orange-500">
-            <p>教科を追加する</p>
-          </span>
-          <IoIosAddCircleOutline
-            size={38}
-            className="hover:size-12 duration-300"
-          />
+
+        <div className="pt-4 flex justify-center items-center">
+          <p className="text-base md:text-xl">・教科を追加する</p>
         </div>
-        <Button>保存</Button>
+        <AddCourse planId={Number(params.id)} />
       </div>
     </div>
   );
