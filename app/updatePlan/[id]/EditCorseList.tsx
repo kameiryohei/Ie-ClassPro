@@ -1,4 +1,3 @@
-import { CourseType } from "@/app/allPost/[id]/types/Course";
 import Modal from "@/app/components/layout/Modal/Modal";
 import { Input } from "@/components/ui/input";
 import { useRef, useState } from "react";
@@ -43,6 +42,10 @@ const EditCorseList: React.FC<EditCorseListProps> = ({ id, name, content }) => {
   }
 
   async function handleUpdate(courseId: number, name: string, content: string) {
+    if (!name || !content) {
+      toast.error("全ての項目を入力してください");
+      return;
+    }
     try {
       const response = await fetch(`/api/course/delete`, {
         method: "PUT",

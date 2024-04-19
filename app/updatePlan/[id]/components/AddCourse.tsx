@@ -32,6 +32,10 @@ const CourseCreateForm: React.FC<AddCourseProps> = ({ planId }) => {
   };
 
   const handleSubmit = async () => {
+    if (forms.some((form) => form.name === "" || form.description === "")) {
+      toast.error("教科を追加するには全ての項目を入力してください");
+      return;
+    }
     const courses = forms.map((form) => ({
       name: form.name,
       content: form.description,
