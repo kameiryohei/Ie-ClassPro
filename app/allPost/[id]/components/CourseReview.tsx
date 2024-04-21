@@ -1,6 +1,7 @@
 "use client";
 import useUser from "@/app/hooks/useUser";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -72,7 +73,7 @@ const CourseReview: React.FC<CourseReviewProps> = ({ id }) => {
         className="flex flex-col md:flex-row gap-4"
       >
         <div className="mb-4">
-          <input
+          <Input
             id="title"
             type="text"
             placeholder="ここに入力してください"
@@ -82,7 +83,7 @@ const CourseReview: React.FC<CourseReviewProps> = ({ id }) => {
                 message: "タイトルを入力してください",
               },
             })}
-            className="border border-gray-300 rounded-md px-3 py-2 w-full focus:outline-none focus:ring focus:border-blue-500"
+            className="border border-gray-300 rounded-md px-3 py-2 w-full"
           />
           {errors.title && (
             <div className="text-red-500 text-sm">{errors.title.message}</div>

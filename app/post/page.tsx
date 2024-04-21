@@ -1,10 +1,10 @@
 "use client";
 import { useRouter } from "next/navigation";
 import useUser from "../hooks/useUser";
-import { PostType } from "../types/postId";
 import Link from "next/link";
 import toast from "react-hot-toast";
 import { Button } from "@/components/ui/button";
+import { PostType } from "./types/PostType";
 
 const AddPostPage = () => {
   const { session, user } = useUser();

@@ -19,10 +19,12 @@ const EditCoursePage = async ({ params }: { params: { id: number } }) => {
   const SpecificCourseDate = await getDetailCourseData(params.id);
   return (
     <div className="px-10 py-4 flex flex-col justify-center">
-      <p className="text-center text-lg font-semibold">
-        これまで投稿したプラン一覧
+      <p className="font-semibold text-center text-xl md:text-3xl">
+        <span className="border-b-4 border-orange-500 inline-block">
+          これまで投稿した履修プラン
+        </span>
       </p>
-      <div className="mt-4 grid gap-5 grid-cols-1  md:grid-cols-2 lg:grid-cols-3">
+      <div className="px-4 lg:px-32 mt-4 grid gap-5 grid-cols-1 lg:grid-cols-2">
         {SpecificCourseDate.map((course: SpecificCourseType) => (
           <SpecificCourseCore
             key={course.id}

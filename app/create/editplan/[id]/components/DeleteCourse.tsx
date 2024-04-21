@@ -26,7 +26,7 @@ const DeleteCourse: React.FC<DeleteCourseProps> = ({ planId }) => {
 
       const data = await response.json();
       toast.success("投稿を削除しました");
-      router.push("/");
+      router.back();
       router.refresh();
     } catch (error) {
       toast.error("投稿の削除に失敗しました");

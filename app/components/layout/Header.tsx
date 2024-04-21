@@ -1,5 +1,4 @@
 "use client";
-import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Sling as Hamburger } from "hamburger-react";
 import { useState } from "react";
@@ -26,12 +25,6 @@ const Header = () => {
             </Link>
 
             <Link
-              href="/post/add"
-              className="font-medium text-gray-500 transition-colors hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-700"
-            >
-              レビュー投稿
-            </Link>
-            <Link
               href="/allPost"
               className="font-medium text-gray-500 transition-colors hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-700"
             >
@@ -45,9 +38,15 @@ const Header = () => {
                 >
                   マイページ
                 </Link>
-                <Button>
-                  <Link href="/create">履修プランを投稿</Link>
-                </Button>
+                <Link
+                  href="/create"
+                  className="font-medium text-gray-500 transition-colors hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-700"
+                >
+                  履修プランを作成
+                </Link>
+                <button className="px-4 py-2 bg-orange-500 text-white rounded-2xl">
+                  ログイン中です
+                </button>
               </>
             ) : (
               <>
@@ -63,6 +62,9 @@ const Header = () => {
                 >
                   新規登録
                 </Link>
+                <button className="px-4 py-2 bg-red-500 text-white rounded-2xl">
+                  ログインしていません
+                </button>
               </>
             )}
           </nav>

@@ -63,7 +63,6 @@ const CourseCreateForm: React.FC<CourseCreateFormProps> = ({ planId }) => {
 
   return (
     <div className="pt-4 flex flex-col items-center gap-3">
-      <p className="text-center text-red-500">{planId}</p>
       {forms.map((form) => (
         <div
           key={form.key}

@@ -1,52 +1,100 @@
-"use client";
-import useUser from "./hooks/useUser";
+import { Button } from "@/components/ui/button";
+import Image from "next/image";
+import Link from "next/link";
+import Session from "./components/Session";
 
 export default function Home() {
-  const { session, user, signOut } = useUser();
-
   return (
-    <main className="flex justify-center items-center h-screen">
-      <div className="max-w-md p-6 bg-gray-100 rounded-lg shadow-lg">
-        <p className="text-2xl font-bold mb-4">Top Page</p>
+    <main className="px-8 md:px-32 py-24">
+      <div className="flex flex-col gap-y-3">
+        <p className="text-center text-3xl  md:text-4xl">
+          履修プランを考えることをもっと楽に
+        </p>
+        <p className="text-center text-2xl md:text-3xl">ClassPlannner</p>
+      </div>
+      <Image
+        src="/images/icon.png"
+        alt="Home"
+        width={200}
+        height={200}
+        className="pt-4 mx-auto rounded-full"
+      />
+      <div className="flex justify-center gap-x-8 flex-col md:flex-row">
+        <Button className="mt-8">
+          <Link href="/user/register">新規登録</Link>
+        </Button>
+        <Button className="mt-8">
+          <Link href="/allPost">履修プランを見る</Link>
+        </Button>
+      </div>
 
-        {session ? (
-          <div>
-            <p className="mb-2">ログイン中です {user?.email}</p>
-            <div className="mb-2">
-              <a href="/post" className="text-blue-500 hover:underline">
-                post一覧
-              </a>
-            </div>
-            <div className="mb-2">
-              <a href="/post/add" className="text-blue-500 hover:underline">
-                post追加
-              </a>
-            </div>
-            <button
-              onClick={() => signOut()}
-              className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-500"
-            >
-              ログアウト
-            </button>
-          </div>
-        ) : (
-          <div>
-            <p className="mb-2">ログアウト中</p>
-            <div className="mb-2">
-              <a
-                href="/user/register"
-                className="text-blue-500 hover:underline"
-              >
-                新規登録ページ
-              </a>
-            </div>
-            <div className="mb-2">
-              <a href="/user/login" className="text-blue-500 hover:underline">
-                ログインページ
-              </a>
+      <div className="mt-8 bg-slate-50 rounded-xl ring-2 ring-gray-400">
+        <p className="text-center text-2xl md:text-3xl pt-4">使い方</p>
+        <div className="px-8 flex justify-center gap-x-8 flex-col md:flex-row">
+          <div className="lg:w-2/3">
+            <p className="text-center text-xl md:text-2xl pt-4">1. 登録</p>
+            <div className="flex justify-center gap-x-8 flex-col  lg:flex-row items-center">
+              <p className="text-center text-lg lg:text-xl pt-4">
+                新規登録をして、自分のプロフィールを編集しよう！学部名などを登録することで、
+                自分の情報を元により多くの人に見てもらうことができます。ログインをしなくても、他の人のプランを見ることができます。
+              </p>
+              <Image
+                src="/images/image2.svg"
+                alt="Register"
+                width={300}
+                height={300}
+                className="pt-4 mx-auto rounded-full"
+              />
             </div>
           </div>
-        )}
+        </div>
+        <div className="border-b-2 border-gray-300" />
+        <div className="px-8 flex justify-center gap-x-8 flex-col md:flex-row">
+          <div className="lg:w-2/3">
+            <p className="text-center text-xl md:text-2xl pt-4">
+              2. 履修プランを投稿
+            </p>
+            <div className="flex justify-center gap-x-8 flex-col  lg:flex-row items-center">
+              <Image
+                src="/images/image1.svg"
+                alt="Register"
+                width={300}
+                height={300}
+                className="pt-4 mx-auto rounded-full"
+              />
+              <p className="text-center text-lg lg:text-xl pt-4">
+                現在自分が受けている授業を登録しよう！その授業の内容や感想を書くことで、他の人に情報を共有することができます。
+                あなたのコメントが後輩などの参考になるかもしれません！
+              </p>
+            </div>
+          </div>
+        </div>
+        <div className="pt-4 border-b-2 border-gray-300" />
+        <div className="px-8 flex justify-center gap-x-8 flex-col md:flex-row">
+          <div className="lg:w-2/3">
+            <p className="text-center text-xl md:text-2xl pt-4">
+              3. 履修プランを更新
+            </p>
+            <div className="flex justify-center gap-x-8 flex-col  lg:flex-row items-center">
+              <p className="text-center text-lg lg:text-xl pt-4">
+                自分が受けた授業を元に履修プランをアップデートしよう！また他の人のプランにコメントを残すこともできます。
+              </p>
+              <Image
+                src="/images/image3.svg"
+                alt="Register"
+                width={300}
+                height={300}
+                className="pt-4 mx-auto rounded-full"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="pt-8">
+        <p className="text-3xl text-center">
+          今すぐ「ClassPlannner」をお試しください!
+        </p>
+        <Session />
       </div>
     </main>
   );

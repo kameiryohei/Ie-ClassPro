@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { Session } from "@supabase/supabase-js";
 import { supabase } from "@/utils/supabase/supabase";
-import { UserType } from "../types/userId";
+import { UserType } from "./types/UserType";
 
 export default function useUser() {
   const [session, setSession] = useState<Session | null>(null);
@@ -36,11 +36,19 @@ export default function useUser() {
   }, [session]);
 
   function signUp({ email, password }: { email: string; password: string }) {
-    supabase.auth.signUp({ email, password });
+    return supabase.auth.signUp({ email, password }).catch((error) => {
+      console.error("Sign up failed:", error);
+      return error;
+    });
   }
 
   function signIn({ email, password }: { email: string; password: string }) {
-    supabase.auth.signInWithPassword({ email, password });
+    return supabase.auth
+      .signInWithPassword({ email, password })
+      .catch((error) => {
+        console.error("Sign in failed:", error);
+        return error;
+      });
   }
 
   function signOut() {
