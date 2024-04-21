@@ -22,7 +22,7 @@ const EditCoursePage = async ({ params }: { params: { id: number } }) => {
       <p className="text-center text-lg font-semibold">
         これまで投稿したプラン一覧
       </p>
-      <div className="mt-4 grid gap-5 grid-cols-1 lg:grid-cols-3">
+      <div className="mt-4 grid gap-5 grid-cols-1  md:grid-cols-2 lg:grid-cols-3">
         {SpecificCourseDate.map((course: SpecificCourseType) => (
           <SpecificCourseCore
             key={course.id}

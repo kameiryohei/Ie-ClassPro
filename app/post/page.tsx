@@ -26,7 +26,7 @@ const AddPostPage = () => {
 
       const data = await response.json();
       toast.success("投稿を削除しました");
-      router.push("/");
+      router.back();
     } catch (error) {
       toast.error("投稿の削除に失敗しました");
 
@@ -53,11 +53,8 @@ const AddPostPage = () => {
 
       {user?.posts.length != 0 ? (
         user?.posts.map((p: PostType, index: number) => (
-          <>
-            <div
-              key={index}
-              className="border-b border-gray-200 py-6 flex justify-between"
-            >
+          <div key={p.id}>
+            <div className="border-b border-gray-200 py-6 flex justify-between">
               <div>
                 <p className="text-lg font-semibold">{p.title}</p>
                 <p className="text-gray-600">{p.content}</p>
@@ -66,7 +63,7 @@ const AddPostPage = () => {
                 <Button onClick={() => deletePost(p.id)}>削除</Button>
               </div>
             </div>
-          </>
+          </div>
         ))
       ) : (
         <p>投稿がひとつもありません！</p>

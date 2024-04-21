@@ -7,12 +7,14 @@ import { IoArrowBackSharp } from "react-icons/io5";
 import { useRouter } from "next/navigation";
 import EditCorseList from "./EditCorseList";
 import AddCourse from "./components/AddCourse";
+import toast from "react-hot-toast";
 
 const UpdatePlanPage = ({ params }: { params: { id: number } }) => {
   const tittleRef = useRef<HTMLInputElement | null>(null);
   const contentRef = useRef<HTMLTextAreaElement | null>(null);
   const router = useRouter();
   const [courses, setCourses] = useState<CourseType[]>([]);
+  const [isUpdated, setIsUpdated] = useState(false);
 
   useEffect(() => {
     async function getDetailData(id: number) {
@@ -28,12 +30,46 @@ const UpdatePlanPage = ({ params }: { params: { id: number } }) => {
     });
   }, []);
 
+  async function tittleUpdate(id: number, title: string, content: string) {
+    if (!title || !content) {
+      toast.error("全ての項目を入力してください");
+      return;
+    }
+    try {
+      const res = await fetch(`/api/plan`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ id, title, content }),
+      });
+
+      if (!res.ok) {
+        throw new Error("Something went wrong");
+      }
+
+      const data = await res.json();
+      if (data.error) {
+        throw new Error(data.error);
+      }
+      toast.success(`プラン名：${data.post.title}を更新しました`);
+      setIsUpdated(true);
+    } catch (error) {
+      toast.error("投稿の削除に失敗しました");
+
+      console.error(error);
+    }
+  }
+
   return (
     <div className="py-8 px-10 md:px-36 relative">
       <IoArrowBackSharp
         size={36}
         className="absolute top-7 hover:ring-2 hover:ring-orange-500 rounded-full duration-200"
-        onClick={() => router.back()}
+        onClick={() => {
+          router.back();
+          router.refresh();
+        }}
       />
 
       <p className="text-xl font-medium md:text-2xl text-center">
@@ -48,6 +84,7 @@ const UpdatePlanPage = ({ params }: { params: { id: number } }) => {
             className="text-base md:text-xl text-center ring-2 ring-gray-300"
             type="text"
             ref={tittleRef}
+            disabled={isUpdated}
           />
           <p className="text-base font-medium md:text-xl text-center">
             ・履修プラン名
@@ -55,8 +92,24 @@ const UpdatePlanPage = ({ params }: { params: { id: number } }) => {
           <Textarea
             className="text-base md:text-xl text-center h-32  ring-2 ring-gray-300"
             ref={contentRef}
+            disabled={isUpdated}
           />
         </div>
+        <button
+          className={`px-6 py-2 rounded-lg duration-300 text-white text-center ${
+            isUpdated ? "bg-gray-400" : " bg-green-700 hover:bg-green-800"
+          }`}
+          onClick={() => {
+            tittleUpdate(
+              Number(params.id),
+              tittleRef.current!.value,
+              contentRef.current!.value
+            );
+          }}
+          disabled={isUpdated}
+        >
+          更新
+        </button>
       </div>
       <div className="p-4 flex flex-col gap-y-2 mt-4 bg-slate-50 rounded-2xl shadow-2xl ring-2 ring-gray-400">
         <p className="text-base font-medium md:text-xl text-center">

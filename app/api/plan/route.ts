@@ -45,3 +45,26 @@ export const GET = async (req: Request, res: NextResponse) => {
     await prisma.$disconnect();
   }
 };
+
+//plan投稿を1つ更新するAPI
+export const PUT = async (req: Request, res: NextResponse) => {
+  try {
+    const { id, title, content } = await req.json();
+
+    await prisma.$connect();
+    const post = await prisma.plan.update({
+      where: {
+        id,
+      },
+      data: {
+        title,
+        content,
+      },
+    });
+    return NextResponse.json({ message: "Success", post });
+  } catch (error) {
+    return NextResponse.json({ message: "Error", error }, { status: 501 });
+  } finally {
+    await prisma.$disconnect();
+  }
+};
