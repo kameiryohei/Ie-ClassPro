@@ -1,4 +1,6 @@
+import { headers } from "next/headers";
 import SpecificCourseCore from "./components/SpecificCourseCore";
+import { config } from "@/lib/config";
 
 type SpecificCourseType = {
   id: number;
@@ -7,8 +9,8 @@ type SpecificCourseType = {
   userId: number;
 };
 
-async function getDetailCourseData(id: number) {
-  const res = await fetch(`http://localhost:3000//api/plan/detail/${id}`, {
+async function getDetailCourseData(id: number, host: string) {
+  const res = await fetch(`${config.apiPrefix}${host}/api/plan/detail/${id}`, {
     cache: "no-store", //ssr
   });
   const data = await res.json();
@@ -16,7 +18,8 @@ async function getDetailCourseData(id: number) {
 }
 
 const EditCoursePage = async ({ params }: { params: { id: number } }) => {
-  const SpecificCourseDate = await getDetailCourseData(params.id);
+  const host = headers().get("host");
+  const SpecificCourseDate = await getDetailCourseData(params.id, host!);
   return (
     <div className="px-10 py-4 flex flex-col justify-center">
       <p className="font-semibold text-center text-xl md:text-3xl">

@@ -4,9 +4,11 @@ import CourseReview from "./components/CourseReview";
 import { CourseType } from "./types/Course";
 import { IoArrowBackSharp } from "react-icons/io5";
 import ParticleReview from "./components/ParticleReview";
+import { headers } from "next/headers";
+import { config } from "@/lib/config";
 
-async function getDetailData(id: number) {
-  const res = await fetch(`http://localhost:3000//api/plan/${id}`, {
+async function getDetailData(id: number, host: string) {
+  const res = await fetch(`${config.apiPrefix}${host}/api/plan/${id}`, {
     cache: "no-store", //ssr
   });
   const data = await res.json();
@@ -14,7 +16,8 @@ async function getDetailData(id: number) {
 }
 
 const SpecificPage = async ({ params }: { params: { id: number } }) => {
-  const CourseData = await getDetailData(params.id);
+  const host = headers().get("host");
+  const CourseData = await getDetailData(params.id, host!);
   const { title, content, user, courses } = CourseData;
   return (
     <>

@@ -1,19 +1,25 @@
+import { headers } from "next/headers";
 import { ReviewType } from "../types/ReviewType";
+import { config } from "@/lib/config";
 
 interface ParticleReviewProps {
   id: number;
 }
 
-async function getReviewData(id: number) {
-  const res = await fetch(`http://localhost:3000/api/post/coursepost/${id}`, {
-    cache: "no-store", //ssr
-  });
+async function getReviewData(id: number, host: string) {
+  const res = await fetch(
+    `${config.apiPrefix}${host}/api/post/coursepost/${id}`,
+    {
+      cache: "no-store", //ssr
+    }
+  );
   const data = await res.json();
   return data;
 }
 
 const ParticleReview: React.FC<ParticleReviewProps> = async ({ id }) => {
-  const ReviewData = await getReviewData(id);
+  const host = headers().get("host");
+  const ReviewData = await getReviewData(id, host!);
   const { post } = ReviewData;
   return (
     <div className="py-5">
