@@ -19,14 +19,7 @@ export default function Home() {
         height={200}
         className="pt-4 mx-auto rounded-full"
       />
-      <div className="flex justify-center gap-x-8 flex-col md:flex-row">
-        <Button className="mt-8">
-          <Link href="/user/register">新規登録</Link>
-        </Button>
-        <Button className="mt-8">
-          <Link href="/allPost">履修プランを見る</Link>
-        </Button>
-      </div>
+      <Session />
 
       <div className="mt-8 bg-slate-50 rounded-xl ring-2 ring-gray-400">
         <p className="text-center text-2xl md:text-3xl pt-4">使い方</p>
@@ -42,8 +35,8 @@ export default function Home() {
                 src="/images/image2.svg"
                 alt="Register"
                 width={300}
-                height={300}
-                className="pt-4 mx-auto rounded-full"
+                height={600}
+                className="pt-4"
               />
             </div>
           </div>

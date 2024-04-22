@@ -15,12 +15,12 @@ const LoadingModal = () => {
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <div className="fixed inset-0 bg-gray-200 bg-opacity-40 transition-opacity"></div>
+          <div className="fixed inset-0 bg-gray-100 bg-opacity-30 transition-opacity"></div>
         </Transition.Child>
         <div className="fixed inset-0 z-10 overflow-y-auto">
           <div className="flex min-h-full items-center justify-center p-4 text-center">
             <Dialog.Panel>
-              <HashLoader color="#ff8e00" size={80} />
+              <HashLoader color="#e87619" size={80} />
             </Dialog.Panel>
           </div>
         </div>

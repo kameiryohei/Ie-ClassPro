@@ -4,6 +4,7 @@ import { IoClose } from "react-icons/io5";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import useUser from "@/app/hooks/useUser";
+import Image from "next/image";
 interface ProfileDrawerProps {
   isOpen: boolean;
   onClose: () => void;
@@ -69,12 +70,6 @@ const ProfileDrawer: React.FC<ProfileDrawerProps> = ({ isOpen, onClose }) => {
                               ホーム
                             </Link>
                             <Link
-                              href="/post/add"
-                              className="border-b-4 border-b-orange-500"
-                            >
-                              レビュー投稿
-                            </Link>
-                            <Link
                               href="/allPost"
                               className="border-b-4 border-b-orange-500"
                             >
@@ -86,11 +81,14 @@ const ProfileDrawer: React.FC<ProfileDrawerProps> = ({ isOpen, onClose }) => {
                                   href="/profile"
                                   className="border-b-4 border-b-orange-500"
                                 >
-                                  プロフィール
+                                  マイページ
                                 </Link>
-                                <Button className="mt-3">
-                                  <Link href="/create">履修プランを投稿</Link>
-                                </Button>
+                                <Link
+                                  href="/create"
+                                  className="border-b-4 border-b-orange-500"
+                                >
+                                  履修プランを投稿する
+                                </Link>
                               </>
                             ) : (
                               <>
@@ -110,6 +108,19 @@ const ProfileDrawer: React.FC<ProfileDrawerProps> = ({ isOpen, onClose }) => {
                             )}
                           </nav>
                         </div>
+                        <div className="flex justify-center">
+                          <Link href="/">
+                            <Image
+                              src="/images/icon.png"
+                              alt="Register"
+                              width={150}
+                              height={300}
+                              className="mt-10 rounded-full"
+                              onClick={onClose}
+                            />
+                          </Link>
+                        </div>
+                        <p className="mt-4 text-center">ClassPlannner</p>
                       </div>
                     </div>
                   </Dialog.Panel>

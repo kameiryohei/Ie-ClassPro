@@ -1,6 +1,8 @@
 import { headers } from "next/headers";
 import SpecificCourseCore from "./components/SpecificCourseCore";
 import { config } from "@/lib/config";
+import Link from "next/link";
+import { MdChevronLeft } from "react-icons/md";
 
 type SpecificCourseType = {
   id: number;
@@ -21,7 +23,7 @@ const EditCoursePage = async ({ params }: { params: { id: number } }) => {
   const host = headers().get("host");
   const SpecificCourseDate = await getDetailCourseData(params.id, host!);
   return (
-    <div className="px-10 py-4 flex flex-col justify-center">
+    <div className="px-10 py-4 pb-24 flex flex-col justify-center">
       <p className="font-semibold text-center text-xl md:text-3xl">
         <span className="border-b-4 border-orange-500 inline-block">
           これまで投稿した履修プラン
@@ -38,6 +40,12 @@ const EditCoursePage = async ({ params }: { params: { id: number } }) => {
           />
         ))}
       </div>
+      <Link
+        href="/profile"
+        className="text-orange-500 text-2xl font-semibold hover:underline mt-8 text-center block"
+      >
+        戻る
+      </Link>
     </div>
   );
 };
