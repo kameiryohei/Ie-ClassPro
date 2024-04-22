@@ -57,9 +57,9 @@ const CourseReview: React.FC<CourseReviewProps> = ({ id }) => {
         <p>
           <Link
             href="/user/login"
-            className="p-3 text-base md:text-2xl bg-white rounded-xl ring-2 ring-gray-300 text-blue-500 hover:underline"
+            className="py-2 px-1 text-base md:text-2xl bg-white rounded-xl ring-2 ring-gray-300 text-blue-500 hover:underline"
           >
-            ログインすることで投稿できます！
+            ログインすると投稿できます
           </Link>
         </p>
       </main>
