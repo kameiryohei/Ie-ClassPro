@@ -2,14 +2,7 @@ import { headers } from "next/headers";
 import SpecificCourseCore from "./components/SpecificCourseCore";
 import { config } from "@/lib/config";
 import Link from "next/link";
-import { MdChevronLeft } from "react-icons/md";
-
-type SpecificCourseType = {
-  id: number;
-  title: string;
-  content: string;
-  userId: number;
-};
+import { SpecificCourseType } from "./types/SpecificCourseType";
 
 async function getDetailCourseData(id: number, host: string) {
   const res = await fetch(`${config.apiPrefix}${host}/api/plan/detail/${id}`, {
@@ -22,6 +15,7 @@ async function getDetailCourseData(id: number, host: string) {
 const EditCoursePage = async ({ params }: { params: { id: number } }) => {
   const host = headers().get("host");
   const SpecificCourseDate = await getDetailCourseData(params.id, host!);
+
   return (
     <div className="px-10 py-4 pb-24 flex flex-col justify-center">
       <p className="font-semibold text-center text-xl md:text-3xl">
