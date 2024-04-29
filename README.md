@@ -1,4 +1,4 @@
-# 【ポートフォリオ】<br>大学生の履修登録を簡易化するアプリ「クラプラ」
+# 【ポートフォリオ】<br>大学生の履修登録を簡易化するアプリ「ClassPlannner」
 
 <br>
 <a href="https://class-planner-mu.vercel.app/">
