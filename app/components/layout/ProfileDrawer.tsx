@@ -2,7 +2,6 @@ import { Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { IoClose } from "react-icons/io5";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
 import useUser from "@/app/hooks/useUser";
 import Image from "next/image";
 interface ProfileDrawerProps {
@@ -120,7 +119,21 @@ const ProfileDrawer: React.FC<ProfileDrawerProps> = ({ isOpen, onClose }) => {
                             />
                           </Link>
                         </div>
-                        <p className="mt-4 text-center">ClassPlannner</p>
+                        <div className="flex justify-center mt-5">
+                          {session ? (
+                            <>
+                              <button className="px-4 py-2 bg-orange-500 text-white rounded-2xl">
+                                ログイン中です
+                              </button>
+                            </>
+                          ) : (
+                            <>
+                              <button className="px-4 py-2 bg-red-500 text-white rounded-2xl">
+                                ログインしていません
+                              </button>
+                            </>
+                          )}
+                        </div>
                       </div>
                     </div>
                   </Dialog.Panel>

@@ -121,7 +121,7 @@ const EditPage = () => {
                 />
                 {errors.name && (
                   <p className="text-red-600 mt-4 text-center">
-                    {errors.name.message}
+                    ユーザー名は1文字以上で入力してください。
                   </p>
                 )}
               </div>
@@ -136,7 +136,7 @@ const EditPage = () => {
               />
               {errors.university && (
                 <p className="text-red-600 mt-4 text-center">
-                  {errors.university.message}
+                  大学名は1文字以上で入力してください。
                 </p>
               )}
             </div>
@@ -150,7 +150,7 @@ const EditPage = () => {
               />
               {errors.faculty && (
                 <p className="text-red-600 mt-4 text-center">
-                  {errors.faculty.message}
+                  学部名は1文字以上で入力してください。
                 </p>
               )}
             </div>
@@ -164,7 +164,7 @@ const EditPage = () => {
               />
               {errors.department && (
                 <p className="text-red-600 mt-4 text-center">
-                  {errors.department.message}
+                  学科名は1文字以上で入力してください
                 </p>
               )}
             </div>
@@ -180,7 +180,7 @@ const EditPage = () => {
               />
               {errors.grade && (
                 <p className="text-red-600 mt-4 text-center">
-                  {errors.grade.message}
+                  1~4の数字を入力してください
                 </p>
               )}
             </div>
