@@ -3,10 +3,14 @@ import { useEffect, useState } from "react";
 import { Session } from "@supabase/supabase-js";
 import { supabase } from "@/utils/supabase/supabase";
 import { UserType } from "./types/UserType";
+import useSWR from "swr";
+
+async function fetcher(url: string) {
+  return fetch(url).then((res) => res.json());
+}
 
 export default function useUser() {
   const [session, setSession] = useState<Session | null>(null);
-  const [user, setUser] = useState<UserType | null>(null);
 
   useEffect(() => {
     const { data: authListener } = supabase.auth.onAuthStateChange(
@@ -20,20 +24,26 @@ export default function useUser() {
     };
   }, []);
 
-  useEffect(() => {
-    const setupUser = async () => {
-      if (session?.user.id) {
-        const response = await fetch(`/api/user/${session.user.id}`);
-        if (response.ok) {
-          const data = await response.json();
-          setUser(data.user);
-        } else {
-          console.error("Failed to fetch user data");
-        }
-      }
-    };
-    setupUser();
-  }, [session]);
+  const { data, error, isLoading } = useSWR(
+    `/api/user/${session?.user.id}`,
+    fetcher
+  );
+  const user = data?.user;
+
+  // useEffect(() => {
+  //   const setupUser = async () => {
+  //     if (session?.user.id) {
+  //       const response = await fetch(`/api/user/${session.user.id}`);
+  //       if (response.ok) {
+  //         const data = await response.json();
+  //         setUser(data.user);
+  //       } else {
+  //         console.error("Failed to fetch user data");
+  //       }
+  //     }
+  //   };
+  //   setupUser();
+  // }, [session]);
 
   function signUp({ email, password }: { email: string; password: string }) {
     return supabase.auth.signUp({ email, password }).catch((error) => {
@@ -55,5 +65,5 @@ export default function useUser() {
     supabase.auth.signOut();
   }
 
-  return { session, user, signUp, signIn, signOut };
+  return { session, user, error, isLoading, signUp, signIn, signOut };
 }
