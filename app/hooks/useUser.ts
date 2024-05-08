@@ -30,21 +30,6 @@ export default function useUser() {
   );
   const user = data?.user;
 
-  // useEffect(() => {
-  //   const setupUser = async () => {
-  //     if (session?.user.id) {
-  //       const response = await fetch(`/api/user/${session.user.id}`);
-  //       if (response.ok) {
-  //         const data = await response.json();
-  //         setUser(data.user);
-  //       } else {
-  //         console.error("Failed to fetch user data");
-  //       }
-  //     }
-  //   };
-  //   setupUser();
-  // }, [session]);
-
   function signUp({ email, password }: { email: string; password: string }) {
     return supabase.auth.signUp({ email, password }).catch((error) => {
       console.error("Sign up failed:", error);
