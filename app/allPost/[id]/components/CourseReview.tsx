@@ -2,7 +2,6 @@
 import useUser from "@/app/hooks/useUser";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { SubmitHandler, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
@@ -21,7 +20,7 @@ const CourseReview: React.FC<CourseReviewProps> = ({ id }) => {
       authorId: 0,
     },
   });
-  const { session, user } = useUser();
+  const { user } = useUser();
   const router = useRouter();
 
   const onSubmit: SubmitHandler<{
@@ -51,42 +50,31 @@ const CourseReview: React.FC<CourseReviewProps> = ({ id }) => {
     }
   };
 
-  if (!session)
-    return (
-      <main className="flex justify-center pt-5">
-        <p>
-          <Link
-            href="/user/login"
-            className="py-2 px-1 text-base md:text-2xl bg-white rounded-xl ring-2 ring-gray-300 text-blue-500 hover:underline"
-          >
-            ログインすると投稿できます
-          </Link>
-        </p>
-      </main>
-    );
-
   return (
     <main className="max-w-md mx-auto p-6">
       <p className="md:text-xl text-center font-bold mb-4">クチコミを投稿</p>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="flex flex-col md:flex-row gap-4"
+        className="flex flex-col justify-center md:flex-row gap-4"
       >
         <div className="mb-4">
           <Input
             id="title"
             type="text"
             placeholder="ここに入力してください"
+            size={40}
             {...register("title", {
               required: {
                 value: true,
-                message: "タイトルを入力してください",
+                message: "文字を入力した後で追加ボタンを押してください",
               },
             })}
-            className="border border-gray-300 rounded-md px-3 py-2 w-full"
+            className="border border-gray-300 rounded-md px-3 py-2 w-full placeholder:text-center"
           />
           {errors.title && (
-            <div className="text-red-500 text-sm">{errors.title.message}</div>
+            <div className="text-red-500 text-sm text-center mt-3">
+              {errors.title.message}
+            </div>
           )}
         </div>
         <Button type="submit">追加</Button>

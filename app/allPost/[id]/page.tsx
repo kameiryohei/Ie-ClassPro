@@ -21,7 +21,7 @@ const SpecificPage = async ({ params }: { params: { id: number } }) => {
   const { title, content, user, courses } = CourseData;
   return (
     <>
-      <div className="py-8 px-14 md:px-36 relative">
+      <div className="py-8 px-10 md:px-36 relative">
         <Link href="/allPost">
           <IoArrowBackSharp
             size={36}
