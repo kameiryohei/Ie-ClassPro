@@ -8,9 +8,11 @@ interface EditCorseListProps {
   name: string;
   content: string;
 }
+
 const EditCorseList: React.FC<EditCorseListProps> = ({ id, name, content }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isUpdated, setIsUpdated] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
   const nameRef = useRef<HTMLInputElement | null>(null);
   const contentRef = useRef<HTMLInputElement | null>(null);
@@ -49,6 +51,7 @@ const EditCorseList: React.FC<EditCorseListProps> = ({ id, name, content }) => {
       toast.error("全ての項目を入力してください");
       return;
     }
+    setIsLoading(true);
     try {
       const response = await fetch(`/api/course/delete`, {
         method: "PUT",
@@ -68,8 +71,10 @@ const EditCorseList: React.FC<EditCorseListProps> = ({ id, name, content }) => {
       }
       toast.success(`教科名：${data.courses.name}の内容を変更しました`);
       setIsUpdated(true);
+      setIsLoading(false);
     } catch (error) {
       toast.error("投稿の削除に失敗しました");
+      setIsLoading(false);
 
       console.error(error);
     }
@@ -138,12 +143,12 @@ const EditCorseList: React.FC<EditCorseListProps> = ({ id, name, content }) => {
         <div className="flex gap-8">
           <button
             onClick={() => setIsOpen(true)}
-            className="bg-red-500 px-4 py-2 rounded-lg hover:bg-red-600 duration-300 text-white text-center"
+            className="bg-red-500 px-6 py-2 rounded-lg hover:bg-red-600 duration-300 text-white text-center"
           >
             削除
           </button>
           <button
-            className={`px-4 py-2 rounded-lg duration-300 text-white text-center ${
+            className={`px-6 py-2 rounded-lg duration-300 text-white text-center ${
               isUpdated ? "bg-gray-500" : "bg-green-700 hover:bg-green-800"
             }`}
             disabled={isUpdated}
@@ -155,7 +160,14 @@ const EditCorseList: React.FC<EditCorseListProps> = ({ id, name, content }) => {
               );
             }}
           >
-            更新
+            {isLoading ? (
+              <div className="flex justify-center items-center">
+                <p>更新中・・・</p>
+                <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white" />
+              </div>
+            ) : (
+              "更新"
+            )}
           </button>
         </div>
       </div>

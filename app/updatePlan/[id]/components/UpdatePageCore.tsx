@@ -8,8 +8,6 @@ import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import EditCorseList from "../EditCorseList";
 import AddCourse from "./AddCourse";
-import useUser from "@/app/hooks/useUser";
-import { UserType } from "@/app/hooks/types/UserType";
 
 interface UpdatePageCoreProps {
   paramsId: number;
@@ -25,6 +23,7 @@ const UpdatePageCore: React.FC<UpdatePageCoreProps> = ({
   courses,
 }) => {
   const [isUpdated, setIsUpdated] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
   const tittleRef = useRef<HTMLInputElement | null>(null);
   const contentRef = useRef<HTMLTextAreaElement | null>(null);
@@ -34,6 +33,7 @@ const UpdatePageCore: React.FC<UpdatePageCoreProps> = ({
       toast.error("全ての項目を入力してください");
       return;
     }
+    setIsLoading(true);
     try {
       const res = await fetch(`/api/plan`, {
         method: "PUT",
@@ -52,9 +52,11 @@ const UpdatePageCore: React.FC<UpdatePageCoreProps> = ({
         throw new Error(data.error);
       }
       toast.success(`プラン名：${data.post.title}を更新しました`);
+      setIsLoading(false);
       setIsUpdated(true);
     } catch (error) {
       toast.error("投稿の削除に失敗しました");
+      setIsLoading(false);
 
       console.error(error);
     }
@@ -109,7 +111,14 @@ const UpdatePageCore: React.FC<UpdatePageCoreProps> = ({
           }}
           disabled={isUpdated}
         >
-          更新
+          {isLoading ? (
+            <div className="flex justify-center items-center">
+              <p>更新中・・・</p>
+              <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white" />
+            </div>
+          ) : (
+            "更新する"
+          )}
         </button>
       </div>
       <div className="p-4 flex flex-col gap-y-2 mt-4 bg-slate-50 rounded-2xl shadow-2xl ring-2 ring-gray-400">

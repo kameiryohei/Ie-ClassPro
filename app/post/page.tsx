@@ -60,54 +60,57 @@ const AddPostPage = () => {
   }
 
   return (
-    <main className="px-12 md:px-48 mx-auto p-6">
+    <main className="px-12 lg:px-48 mx-auto p-6">
       <p className="font-semibold text-center text-xl md:text-3xl">
         <span className="border-b-4 border-orange-500 inline-block">
           これまで投稿したレビュー
         </span>
       </p>
-      <div className="pt-6 grid lg:grid-cols-2 gap-9">
+      <div className="pt-6 grid md:grid-cols-2 gap-9">
         {user?.posts.length !== 0 ? (
           user?.posts.map((post: PostType) =>
             !deletedPostIds.includes(post.id) ? (
-              <div key={post.id}>
-                <div className="px-4 border-b ring ring-gray-100 border-gray-200 flex justify-between py-6 bg-orange-200 rounded-xl">
-                  <div>
-                    <p className="text-lg font-semibold">
-                      投稿内容：{post.title}
-                    </p>
-                    <p className="text-gray-600">
-                      投稿日時：
-                      {new Date(post.createdAt).toLocaleDateString()}
-                      {new Date(post.createdAt).toLocaleTimeString()}
-                    </p>
-                  </div>
-                  <div>
-                    <button
-                      className={`text-white px-5 py-3 duration-200 rounded-xl ${
-                        loadingStates[post.id]
-                          ? "bg-gray-500"
-                          : "bg-red-500 hover:bg-red-600"
-                      }`}
-                      onClick={() => deletePost(post.id)}
-                      disabled={loadingStates[post.id]}
-                    >
-                      {loadingStates[post.id] ? (
-                        <div className="flex">
-                          <p>削除中・・・</p>
-                          <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white" />
-                        </div>
-                      ) : (
-                        "削除する"
-                      )}
-                    </button>
-                  </div>
+              <div
+                key={post.id}
+                className="flex flex-col gap-y-3 lg:justify-between items-center bg-orange-200 rounded-xl px-4 py-6 border-b border-gray-200 ring-2 ring-gray-100"
+              >
+                <div>
+                  <p className="text-lg font-semibold">
+                    投稿内容：{post.title}
+                  </p>
+                  <p className="text-gray-600">
+                    投稿日付：
+                    {new Date(post.createdAt).toLocaleDateString()}日・
+                    投稿時間： {new Date(post.createdAt).toLocaleTimeString()}
+                  </p>
+                </div>
+                <div className="mt-4 lg:mt-0 lg:ml-4">
+                  <button
+                    className={`text-white px-5 py-3 duration-200 rounded-xl ${
+                      loadingStates[post.id]
+                        ? "bg-gray-500"
+                        : "bg-red-500 hover:bg-red-600"
+                    }`}
+                    onClick={() => deletePost(post.id)}
+                    disabled={loadingStates[post.id]}
+                  >
+                    {loadingStates[post.id] ? (
+                      <div className="flex">
+                        <p>削除中・・・</p>
+                        <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white" />
+                      </div>
+                    ) : (
+                      "削除する"
+                    )}
+                  </button>
                 </div>
               </div>
             ) : null
           )
         ) : (
-          <p>投稿がひとつもありません！</p>
+          <div className="col-span-2 flex justify-center">
+            <p className="text-xl md:text-3xl">投稿がひとつもありません！</p>
+          </div>
         )}
       </div>
       <Link
