@@ -11,6 +11,7 @@ interface DeleteCourseProps {
 const DeleteCourse: React.FC<DeleteCourseProps> = ({ planId }) => {
   const router = useRouter();
   const handleDelete = async () => {
+    setIsLoading(true);
     try {
       const response = await fetch(`/api/plan/delete`, {
         method: "DELETE",
@@ -25,6 +26,10 @@ const DeleteCourse: React.FC<DeleteCourseProps> = ({ planId }) => {
       }
 
       const data = await response.json();
+      if (!data) {
+        toast.error("投稿の削除に失敗しました");
+      }
+      setIsLoading(false);
       toast.success("投稿を削除しました");
       router.back();
       router.refresh();
@@ -34,6 +39,7 @@ const DeleteCourse: React.FC<DeleteCourseProps> = ({ planId }) => {
     }
   };
   const [isOpen, setIsOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const modalOpen = () => {
     return (
       <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
@@ -52,7 +58,14 @@ const DeleteCourse: React.FC<DeleteCourseProps> = ({ planId }) => {
               className="p-3 bg-red-500 text-white rounded-md hover:bg-red-400 duration-200"
               onClick={handleDelete}
             >
-              はい
+              {isLoading ? (
+                <div className="flex">
+                  <p>削除中・・・</p>
+                  <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white" />
+                </div>
+              ) : (
+                "はい"
+              )}
             </button>
           </div>
         </div>

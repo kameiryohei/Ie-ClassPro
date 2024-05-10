@@ -28,7 +28,7 @@ export default function useUser() {
     `/api/user/${session?.user.id}`,
     fetcher
   );
-  const user = data?.user;
+  const user: UserType = data?.user;
 
   function signUp({ email, password }: { email: string; password: string }) {
     return supabase.auth.signUp({ email, password }).catch((error) => {

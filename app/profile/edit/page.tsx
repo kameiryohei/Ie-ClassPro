@@ -8,7 +8,7 @@ import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { z } from "zod";
 import { FormData } from "./types/EditType";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { MdChevronLeft } from "react-icons/md";
 
@@ -49,8 +49,10 @@ const formSchema = z.object({
 const EditPage = () => {
   const { user, session } = useUser();
   const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
 
   const onSubmit = async (data: FormData) => {
+    setIsLoading(true);
     if (session?.user?.id) {
       const res = await EditProfile(
         data.name,
@@ -63,6 +65,7 @@ const EditPage = () => {
       if (res.message === "Updated successfully") {
         toast.success("プロフィールを更新しました");
         router.push("/profile");
+        setIsLoading(false);
       } else {
         toast.error("プロフィールの更新に失敗しました");
         console.error(res);
@@ -184,7 +187,16 @@ const EditPage = () => {
                 </p>
               )}
             </div>
-            <Button className="mt-3">更新</Button>
+            <Button className="mt-3" disabled={isLoading}>
+              {isLoading ? (
+                <div className="flex justify-center items-center">
+                  <p>更新中・・・</p>
+                  <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white" />
+                </div>
+              ) : (
+                "更新する"
+              )}
+            </Button>
           </form>
         </div>
       </div>

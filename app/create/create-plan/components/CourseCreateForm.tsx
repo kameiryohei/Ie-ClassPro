@@ -14,6 +14,7 @@ const CourseCreateForm: React.FC<CourseCreateFormProps> = ({ planId }) => {
     { key: 1, name: "", description: "" },
     { key: 2, name: "", description: "" },
   ]);
+  const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
   const addForm = () => {
@@ -35,12 +36,17 @@ const CourseCreateForm: React.FC<CourseCreateFormProps> = ({ planId }) => {
   };
 
   const handleSubmit = async () => {
+    if (forms.some((form) => form.name === "" || form.description === "")) {
+      toast.error("入力していない項目があります");
+      return;
+    }
     const courses = forms.map((form) => ({
       name: form.name,
       content: form.description,
     }));
 
     try {
+      setIsLoading(true);
       const res = await fetch("/api/course", {
         method: "POST",
         body: JSON.stringify({ courses, planId }),
@@ -54,6 +60,7 @@ const CourseCreateForm: React.FC<CourseCreateFormProps> = ({ planId }) => {
       }
       toast.success("教科を保存しました");
       router.push("/");
+      setIsLoading(false);
       router.refresh();
     } catch (error) {
       console.error("Error:", error);
@@ -117,7 +124,23 @@ const CourseCreateForm: React.FC<CourseCreateFormProps> = ({ planId }) => {
         />
       </div>
       <div className="pt-3">
-        <Button onClick={handleSubmit}>保存</Button>
+        <button
+          onClick={handleSubmit}
+          className={`px-4 py-3 text-sm rounded-2xl text-white w-full shadow-lg hover:bg-orange-600 ${
+            isLoading ? "cursor-not-allowed bg-gray-500" : "bg-orange-500 "
+          }`}
+        >
+          {isLoading ? (
+            <>
+              <div className="flex justify-center items-center">
+                <p>投稿中・・・</p>
+                <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white" />
+              </div>
+            </>
+          ) : (
+            "投稿する"
+          )}
+        </button>
       </div>
     </div>
   );

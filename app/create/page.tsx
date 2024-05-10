@@ -8,6 +8,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import useUser from "../hooks/useUser";
+import { useState } from "react";
 
 interface PlanTittleTypes {
   title: string;
@@ -22,6 +23,7 @@ const schema = z.object({
 const PlanCreate = () => {
   const router = useRouter();
   const user = useUser();
+  const [isLoading, setIsLoading] = useState(false);
   const {
     register,
     handleSubmit,
@@ -31,6 +33,7 @@ const PlanCreate = () => {
   });
 
   const onSubmit = async (data: PlanTittleTypes) => {
+    setIsLoading(true);
     try {
       const res = await fetch("/api/plan", {
         method: "POST",
@@ -52,6 +55,7 @@ const PlanCreate = () => {
       params.append("planId", planId.toString());
       const href = `/create/create-plan?${params}`;
       router.push(href);
+      setIsLoading(false);
     } catch (error) {
       console.error("Error:", error);
       toast.error("エラーが発生しました。もう一度お試しください。");
@@ -97,10 +101,22 @@ const PlanCreate = () => {
             <div className="pt-3">
               <button
                 type="submit"
-                className="p-3 text-sm bg-orange-500 rounded-2xl text-white w-full shadow-lg hover:bg-orange-600 transition-colors duration-300"
+                className={`p-3 text-sm rounded-2xl text-white w-full shadow-lg hover:bg-orange-600 ${
+                  isLoading
+                    ? "cursor-not-allowed bg-gray-500"
+                    : "bg-orange-500 "
+                }`}
                 onClick={handleSubmit(onSubmit)}
+                disabled={isLoading}
               >
-                次へ
+                {isLoading ? (
+                  <div className="flex justify-center items-center">
+                    <p>投稿中・・・</p>
+                    <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white" />
+                  </div>
+                ) : (
+                  "投稿する"
+                )}
               </button>
             </div>
           </div>

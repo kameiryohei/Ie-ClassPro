@@ -3,6 +3,7 @@ import useUser from "@/app/hooks/useUser";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 
@@ -22,12 +23,14 @@ const CourseReview: React.FC<CourseReviewProps> = ({ id }) => {
   });
   const { user } = useUser();
   const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
 
   const onSubmit: SubmitHandler<{
     title: string;
     authorId: number;
   }> = async (data) => {
     try {
+      setIsLoading(true);
       const res = await fetch("../api/post/coursepost/", {
         cache: "no-store", // ssr
         method: "POST",
@@ -41,6 +44,7 @@ const CourseReview: React.FC<CourseReviewProps> = ({ id }) => {
         },
       });
       console.log(res);
+      setIsLoading(false);
       toast.success("投稿しました");
       router.push("/allPost");
       router.refresh();
@@ -66,7 +70,7 @@ const CourseReview: React.FC<CourseReviewProps> = ({ id }) => {
             {...register("title", {
               required: {
                 value: true,
-                message: "文字を入力した後で追加ボタンを押してください",
+                message: "文字を入力してください",
               },
             })}
             className="border border-gray-300 rounded-md px-3 py-2 w-full placeholder:text-center"
@@ -77,7 +81,16 @@ const CourseReview: React.FC<CourseReviewProps> = ({ id }) => {
             </div>
           )}
         </div>
-        <Button type="submit">追加</Button>
+        <Button type="submit" disabled={isLoading}>
+          {isLoading ? (
+            <>
+              <p>投稿中です・・・</p>
+              <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white-600" />
+            </>
+          ) : (
+            "投稿する"
+          )}
+        </Button>
       </form>
     </main>
   );

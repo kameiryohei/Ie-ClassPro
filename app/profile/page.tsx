@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import toast from "react-hot-toast";
 import { ClipLoader } from "react-spinners";
+import { useState } from "react";
 
 const ProfilePage = () => {
   const { signOut, user, error, isLoading } = useUser();
@@ -59,9 +60,12 @@ const ProfilePage = () => {
           </button>
         </div>
         <div>
-          <Button onClick={logOut} className="mt-5 bg-red-500">
+          <button
+            onClick={logOut}
+            className="mt-5 bg-red-500 hover:bg-red-600 text-white px-5 py-3 duration-200 rounded-xl"
+          >
             ログアウト
-          </Button>
+          </button>
         </div>
       </div>
     </div>

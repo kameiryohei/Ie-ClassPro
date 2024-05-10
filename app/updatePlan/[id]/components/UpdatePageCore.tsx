@@ -8,6 +8,8 @@ import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import EditCorseList from "../EditCorseList";
 import AddCourse from "./AddCourse";
+import useUser from "@/app/hooks/useUser";
+import { UserType } from "@/app/hooks/types/UserType";
 
 interface UpdatePageCoreProps {
   paramsId: number;
@@ -57,6 +59,7 @@ const UpdatePageCore: React.FC<UpdatePageCoreProps> = ({
       console.error(error);
     }
   }
+
   return (
     <div className="py-8 px-10 md:px-36 relative">
       <IoArrowBackSharp
