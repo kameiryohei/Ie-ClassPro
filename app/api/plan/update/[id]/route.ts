@@ -12,6 +12,7 @@ export async function GET(
     },
     include: {
       courses: true,
+      user: true,
     },
   });
   return NextResponse.json(CourseData);

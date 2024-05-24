@@ -4,6 +4,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import useUser from "@/app/hooks/useUser";
 import { Input } from "@/components/ui/input";
 import toast from "react-hot-toast";
+import { useState } from "react";
 
 const RegisterPage = () => {
   const {
@@ -19,16 +20,22 @@ const RegisterPage = () => {
 
   const { signUp } = useUser();
   const router = useRouter();
+  const [loading, setLoading] = useState(false);
 
   const doRegister: SubmitHandler<{ email: string; password: string }> = async (
     formData
   ) => {
     try {
+      setLoading(true);
       await signUp({ email: formData.email, password: formData.password });
+      alert(
+        "登録いただいたメールアドレスに確認メールを送信しましたのでご確認ください！(メールの送信は数分かかる場合がありますのでご了承ください)"
+      );
       router.push("/");
     } catch (error) {
       console.error(error);
       toast.error("エラーが発生しました");
+      setLoading(false);
     }
   };
 
@@ -88,9 +95,20 @@ const RegisterPage = () => {
 
             <button
               type="submit"
-              className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-500"
+              className={`text-white px-4 py-2 rounded-md focus:outline-none ${
+                loading
+                  ? "cursor-not-allowed bg-gray-400"
+                  : "bg-blue-500 hover:bg-blue-600 transition-colors duration-300 focus:border-blue-500 focus:ring"
+              }`}
             >
-              新規登録する
+              {loading ? (
+                <div className="flex justify-center items-center">
+                  <p>読み込み中・・・</p>
+                  <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white" />
+                </div>
+              ) : (
+                "新規登録"
+              )}
             </button>
           </form>
         </div>

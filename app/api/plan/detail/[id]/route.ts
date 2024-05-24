@@ -10,7 +10,7 @@ export async function GET(
     where: {
       id: parseInt(userId),
     },
-    select: {
+    include: {
       plans: true,
     },
   });

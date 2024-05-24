@@ -19,11 +19,13 @@ const LoginPage = () => {
   });
   const { signIn } = useUser();
   const router = useRouter();
+  const [loading, setLoading] = useState(false);
 
   const doLogin: SubmitHandler<{ email: string; password: string }> = async (
     formData
   ) => {
     try {
+      setLoading(true);
       const { error } = await signIn({
         email: formData.email,
         password: formData.password,
@@ -32,14 +34,17 @@ const LoginPage = () => {
         // エラー時の処理
         console.error(error);
         toast.error("メールアドレス、もしくはパスワードが違います");
+        setLoading(false);
       } else {
         // 成功時の処理
         toast.success("ログインしました");
         router.push("/");
+        setLoading(false);
       }
     } catch (error) {
       console.error(error);
       toast.error("予期せぬエラーが発生しました");
+      setLoading(false);
     }
   };
 
@@ -53,6 +58,7 @@ const LoginPage = () => {
               <Input
                 id="email"
                 placeholder="メールアドレス"
+                disabled={loading}
                 {...register("email", {
                   required: {
                     value: true,
@@ -77,6 +83,7 @@ const LoginPage = () => {
               <Input
                 id="password"
                 type="password"
+                disabled={loading}
                 placeholder="パスワード"
                 {...register("password", {
                   required: {
@@ -99,9 +106,20 @@ const LoginPage = () => {
 
             <button
               type="submit"
-              className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-500"
+              className={`text-white px-4 py-2 rounded-md focus:outline-none ${
+                loading
+                  ? "cursor-not-allowed bg-gray-400"
+                  : "bg-blue-500 hover:bg-blue-600 transition-colors duration-300 focus:border-blue-500 focus:ring"
+              }`}
             >
-              ログインする
+              {loading ? (
+                <div className="flex justify-center items-center">
+                  <p>ログイン中・・・</p>
+                  <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white" />
+                </div>
+              ) : (
+                "ログイン"
+              )}
             </button>
           </form>
         </div>

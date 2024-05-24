@@ -8,12 +8,16 @@ import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import EditCorseList from "../EditCorseList";
 import AddCourse from "./AddCourse";
+import useUser from "@/app/hooks/useUser";
+import { UserType } from "@/app/hooks/types/UserType";
+import NotAllowPage from "@/app/components/NotAllowPage";
 
 interface UpdatePageCoreProps {
   paramsId: number;
   title: string;
   content: string;
   courses: CourseType[];
+  userData: UserType;
 }
 
 const UpdatePageCore: React.FC<UpdatePageCoreProps> = ({
@@ -21,12 +25,14 @@ const UpdatePageCore: React.FC<UpdatePageCoreProps> = ({
   title,
   content,
   courses,
+  userData,
 }) => {
   const [isUpdated, setIsUpdated] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
   const tittleRef = useRef<HTMLInputElement | null>(null);
   const contentRef = useRef<HTMLTextAreaElement | null>(null);
+  const { user } = useUser();
 
   async function tittleUpdate(id: number, title: string, content: string) {
     if (!title || !content) {
@@ -60,6 +66,10 @@ const UpdatePageCore: React.FC<UpdatePageCoreProps> = ({
 
       console.error(error);
     }
+  }
+
+  if (user?.id !== userData.id) {
+    return <NotAllowPage />; //アクセス制限
   }
 
   return (

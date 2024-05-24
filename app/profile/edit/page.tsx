@@ -11,6 +11,7 @@ import { FormData } from "./types/EditType";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { MdChevronLeft } from "react-icons/md";
+import NotAllowPage from "@/app/components/NotAllowPage";
 
 const EditProfile = async (
   name: string,
@@ -99,6 +100,7 @@ const EditPage = () => {
     setValue("grade", user?.grade?.toString() || ""); // gradeはstringに変換
   }, [user, setValue]);
 
+  if (!session) return <NotAllowPage />;
   return (
     <div className="mx-auto max-w-3xl lg:max-w-2xl px-4 sm:px-6 lg:px-8 pb-16 pt-20 text-center lg:pt-32">
       <div className="bg-gray-100 rounded-2xl shadow-2xl py-2">

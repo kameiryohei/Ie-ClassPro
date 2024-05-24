@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import useUser from "../hooks/useUser";
 import { useState } from "react";
+import NotAllowPage from "../components/NotAllowPage";
 
 interface PlanTittleTypes {
   title: string;
@@ -61,6 +62,9 @@ const PlanCreate = () => {
       toast.error("エラーが発生しました。もう一度お試しください。");
     }
   };
+  if (!user.session) {
+    return <NotAllowPage />;
+  }
 
   return (
     <div className="mx-auto text-3xl max-w-3xl lg:max-w-2xl px-2 sm:px-4 lg:px-6 pb-16 pt-24 text-center lg:pt-32">
@@ -75,7 +79,7 @@ const PlanCreate = () => {
             type="text"
             id="title"
             placeholder="タイトル"
-            className="mt-3 bg-slate-50 shadow-lg w-full px-4 py-4"
+            className="mt-3 bg-slate-50 shadow-lg w-full p-4"
           />
           {errors.title && (
             <span className="text-red-500 text-center text-base">

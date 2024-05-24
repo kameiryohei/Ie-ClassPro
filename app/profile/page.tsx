@@ -5,10 +5,10 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import toast from "react-hot-toast";
 import { ClipLoader } from "react-spinners";
-import { useState } from "react";
+import NotAllowPage from "../components/NotAllowPage";
 
 const ProfilePage = () => {
-  const { signOut, user, error, isLoading } = useUser();
+  const { signOut, user, isLoading, session } = useUser();
   const router = useRouter();
   const id = user?.id;
 
@@ -19,6 +19,9 @@ const ProfilePage = () => {
     router.refresh();
   };
 
+  if (!session) {
+    return <NotAllowPage />;
+  }
   return (
     <div className="mx-auto max-w-3xl lg:max-w-2xl px-4 sm:px-6 lg:px-8 pb-16 pt-20 text-center lg:pt-32">
       <h1 className="text-2xl font-bold mb-5">プロフィール画面</h1>

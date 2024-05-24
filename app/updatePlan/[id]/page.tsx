@@ -11,17 +11,16 @@ async function getDetailData(id: number, host: string) {
 const UpdatePage = async ({ params }: { params: { id: number } }) => {
   const host = headers().get("host");
   const uniqueDate = await getDetailData(params.id, host!);
-  const { title, content, courses } = uniqueDate;
+  const { title, content, courses, user } = uniqueDate;
 
   return (
-    <div>
-      <UpdatePageCore
-        paramsId={params.id}
-        title={title}
-        content={content}
-        courses={courses}
-      />
-    </div>
+    <UpdatePageCore
+      paramsId={params.id}
+      title={title}
+      content={content}
+      courses={courses}
+      userData={user}
+    />
   );
 };
 

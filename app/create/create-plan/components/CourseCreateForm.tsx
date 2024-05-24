@@ -2,7 +2,6 @@ import { Input } from "@/components/ui/input";
 import { IoIosAddCircleOutline } from "react-icons/io";
 import { useState } from "react";
 import toast from "react-hot-toast";
-import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 
 type CourseCreateFormProps = {
@@ -54,7 +53,6 @@ const CourseCreateForm: React.FC<CourseCreateFormProps> = ({ planId }) => {
           "Content-Type": "application/json",
         },
       });
-      console.log(res);
       if (!res.ok) {
         throw new Error("エラーが発生しました");
       }
@@ -64,7 +62,8 @@ const CourseCreateForm: React.FC<CourseCreateFormProps> = ({ planId }) => {
       router.refresh();
     } catch (error) {
       console.error("Error:", error);
-      toast.error("エラーが発生しました。もう一度お試しください。");
+      toast.error("エラーが発生しました。");
+      setIsLoading(false);
     }
   };
 
