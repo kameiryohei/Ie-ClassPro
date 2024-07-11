@@ -17,7 +17,7 @@ async function getReviewData(id: number, host: string) {
   return data;
 }
 
-const ParticleReview: React.FC<ParticleReviewProps> = async ({ id }) => {
+const ParticleReview = async ({ id }: ParticleReviewProps) => {
   const host = headers().get("host");
   const ReviewData = await getReviewData(id, host!);
   const { post } = ReviewData;

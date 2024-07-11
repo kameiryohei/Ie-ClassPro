@@ -18,7 +18,7 @@ interface CardListProps {
   };
 }
 
-const CardList: React.FC<CardListProps> = ({ id, tittle, content, user }) => {
+const CardList = ({ id, tittle, content, user }: CardListProps) => {
   const { name, university } = user;
   return (
     <div className="border-2 rounded-xl border-slate-200  shadow-2xl">

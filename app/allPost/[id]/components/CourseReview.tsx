@@ -10,7 +10,7 @@ import toast from "react-hot-toast";
 interface CourseReviewProps {
   id: number;
 }
-const CourseReview: React.FC<CourseReviewProps> = ({ id }) => {
+const CourseReview = ({ id }: CourseReviewProps) => {
   const {
     register,
     handleSubmit,

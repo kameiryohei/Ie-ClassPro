@@ -8,7 +8,7 @@ type CourseCreateFormProps = {
   planId: number | null;
 };
 
-const CourseCreateForm: React.FC<CourseCreateFormProps> = ({ planId }) => {
+const CourseCreateForm = ({ planId }: CourseCreateFormProps) => {
   const [forms, setForms] = useState([
     { key: 1, name: "", description: "" },
     { key: 2, name: "", description: "" },

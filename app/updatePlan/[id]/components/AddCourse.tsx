@@ -9,7 +9,7 @@ interface AddCourseProps {
   planId: number;
 }
 
-const CourseCreateForm: React.FC<AddCourseProps> = ({ planId }) => {
+const CourseCreateForm = ({ planId }: AddCourseProps) => {
   const [forms, setForms] = useState([{ key: 1, name: "", description: "" }]);
   const router = useRouter();
 

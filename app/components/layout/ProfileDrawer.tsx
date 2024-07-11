@@ -9,7 +9,7 @@ interface ProfileDrawerProps {
   onClose: () => void;
 }
 
-const ProfileDrawer: React.FC<ProfileDrawerProps> = ({ isOpen, onClose }) => {
+const ProfileDrawer = ({ isOpen, onClose }: ProfileDrawerProps) => {
   const { session } = useUser();
   return (
     <div>

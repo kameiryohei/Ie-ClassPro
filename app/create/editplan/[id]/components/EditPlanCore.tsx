@@ -9,9 +9,7 @@ interface SpecificCourseDateProps {
   SpecificCourseDate: SpecificCourseType[];
 }
 
-const EditPlanCore: React.FC<SpecificCourseDateProps> = ({
-  SpecificCourseDate,
-}) => {
+const EditPlanCore = ({ SpecificCourseDate }: SpecificCourseDateProps) => {
   const { user } = useUser();
   const currentUserId = user?.id;
   const userIds = SpecificCourseDate.map((course) => course.userId);

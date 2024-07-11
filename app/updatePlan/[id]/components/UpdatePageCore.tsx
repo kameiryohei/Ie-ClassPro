@@ -20,13 +20,13 @@ interface UpdatePageCoreProps {
   userData: UserType;
 }
 
-const UpdatePageCore: React.FC<UpdatePageCoreProps> = ({
+const UpdatePageCore = ({
   paramsId,
   title,
   content,
   courses,
   userData,
-}) => {
+}: UpdatePageCoreProps) => {
   const [isUpdated, setIsUpdated] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();

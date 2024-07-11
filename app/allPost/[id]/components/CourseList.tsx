@@ -10,7 +10,7 @@ interface CourseListProps {
   content: string;
 }
 
-const CourseList: React.FC<CourseListProps> = ({ name, content }) => {
+const CourseList = ({ name, content }: CourseListProps) => {
   return (
     <div className="">
       <Accordion type="single" collapsible>

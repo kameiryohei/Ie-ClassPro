@@ -9,7 +9,7 @@ interface EditCorseListProps {
   content: string;
 }
 
-const EditCorseList: React.FC<EditCorseListProps> = ({ id, name, content }) => {
+const EditCorseList = ({ id, name, content }: EditCorseListProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isUpdated, setIsUpdated] = useState(false);
   const [isLoading, setIsLoading] = useState(false);

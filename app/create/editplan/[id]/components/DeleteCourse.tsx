@@ -8,7 +8,7 @@ interface DeleteCourseProps {
   planId: number;
 }
 
-const DeleteCourse: React.FC<DeleteCourseProps> = ({ planId }) => {
+const DeleteCourse = ({ planId }: DeleteCourseProps) => {
   const router = useRouter();
   const handleDelete = async () => {
     setIsLoading(true);
