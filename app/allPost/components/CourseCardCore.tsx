@@ -5,7 +5,7 @@ import { config } from "@/lib/config";
 
 async function getAllCoursesDate(host: string) {
   const res = await fetch(`${config.apiPrefix}${host}/api/plan`, {
-    cache: "no-store", //ssr
+    cache: "no-cache", //ssr
   });
   const data = await res.json();
   return data.posts;

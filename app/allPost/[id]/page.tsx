@@ -9,7 +9,7 @@ import { config } from "@/lib/config";
 
 async function getDetailData(id: number, host: string) {
   const res = await fetch(`${config.apiPrefix}${host}/api/plan/${id}`, {
-    cache: "no-store", //ssr
+    cache: "no-cache", //ssr
   });
   const data = await res.json();
   return data;
