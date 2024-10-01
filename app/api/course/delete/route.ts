@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
-import prisma from "@/utils/prisma/prismaClient";
-import { CourseType } from "@/app/allPost/[id]/types/Course";
+import prisma from "utils/prisma/prismaClient";
+import { CourseType } from "app/allPost/[id]/types/Course";
 
 //編集画面で教科を削除するための関数　app/updatePlan/[id]/EditCorseList.tsxで使用
 export const DELETE = async (req: Request, res: NextResponse) => {

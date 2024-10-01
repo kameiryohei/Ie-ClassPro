@@ -1,4 +1,4 @@
-import Modal from "@/app/components/layout/Modal/Modal";
+import Modal from "app/components/layout/Modal/Modal";
 import { Input } from "@/components/ui/input";
 import { useRef, useState } from "react";
 import toast from "react-hot-toast";

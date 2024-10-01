@@ -2,8 +2,8 @@
 import SpecificCourseCore from "./SpecificCourseCore";
 import { SpecificCourseType } from "../types/SpecificCourseType";
 import Link from "next/link";
-import useUser from "@/app/hooks/useUser";
-import NotAllowPage from "@/app/components/NotAllowPage";
+import useUser from "app/hooks/useUser";
+import NotAllowPage from "app/components/NotAllowPage";
 
 interface SpecificCourseDateProps {
   SpecificCourseDate: SpecificCourseType[];

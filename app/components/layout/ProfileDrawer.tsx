@@ -2,7 +2,7 @@ import { Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { IoClose } from "react-icons/io5";
 import Link from "next/link";
-import useUser from "@/app/hooks/useUser";
+import useUser from "app/hooks/useUser";
 import Image from "next/image";
 interface ProfileDrawerProps {
   isOpen: boolean;

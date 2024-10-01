@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import prisma from "@/utils/prisma/prismaClient";
+import prisma from "utils/prisma/prismaClient";
 
 // post投稿用API
 export const POST = async (req: Request, res: NextResponse) => {

@@ -1,5 +1,5 @@
 import { headers } from "next/headers";
-import { config } from "@/lib/config";
+import { config } from "lib/config";
 import EditPlanCore from "./components/EditPlanCore";
 
 async function getDetailCourseData(id: number, host: string) {

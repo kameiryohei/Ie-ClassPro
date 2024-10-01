@@ -1,6 +1,6 @@
 import { headers } from "next/headers";
 import { ReviewType } from "../types/ReviewType";
-import { config } from "@/lib/config";
+import { config } from "lib/config";
 
 interface ParticleReviewProps {
   id: number;

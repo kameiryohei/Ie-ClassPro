@@ -2,15 +2,15 @@
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useRef, useState } from "react";
-import { CourseType } from "@/app/allPost/[id]/types/Course";
+import { CourseType } from "app/allPost/[id]/types/Course";
 import { IoArrowBackSharp } from "react-icons/io5";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import EditCorseList from "../EditCorseList";
 import AddCourse from "./AddCourse";
-import useUser from "@/app/hooks/useUser";
-import { UserType } from "@/app/hooks/types/UserType";
-import NotAllowPage from "@/app/components/NotAllowPage";
+import useUser from "app/hooks/useUser";
+import { UserType } from "app/hooks/types/UserType";
+import NotAllowPage from "app/components/NotAllowPage";
 
 interface UpdatePageCoreProps {
   paramsId: number;
