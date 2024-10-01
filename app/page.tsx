@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Session from "./components/Session";
-import { client } from "@/lib/client";
+import { client } from "lib/client";
 import { CmsData } from "./components/CmsType";
 
 export default async function Home() {

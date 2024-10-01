@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Sling as Hamburger } from "hamburger-react";
 import { useState } from "react";
 import ProfileDrawer from "./ProfileDrawer";
-import useUser from "@/app/hooks/useUser";
+import useUser from "app/hooks/useUser";
 
 const Header = () => {
   const [isOpen, setOpen] = useState(false);
