@@ -1,7 +1,7 @@
 import { headers } from "next/headers";
 import { CourseListType } from "../types/CourseListType";
 import CardList from "./CardList";
-import { config } from "@/lib/config";
+import { config } from "lib/config";
 
 async function getAllCoursesDate(host: string) {
   const res = await fetch(`${config.apiPrefix}${host}/api/plan`, {

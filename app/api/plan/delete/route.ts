@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import prisma from "@/utils/prisma/prismaClient";
+import prisma from "utils/prisma/prismaClient";
 
 // 自分が作成したプランを削除するAPI
 

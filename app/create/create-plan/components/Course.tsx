@@ -1,8 +1,8 @@
 "use client";
 import { useSearchParams } from "next/navigation";
 import CourseCreateForm from "./CourseCreateForm";
-import useUser from "@/app/hooks/useUser";
-import NotAllowPage from "@/app/components/NotAllowPage";
+import useUser from "app/hooks/useUser";
+import NotAllowPage from "app/components/NotAllowPage";
 
 const Course = () => {
   const params = useSearchParams();

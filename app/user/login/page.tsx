@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
-import useUser from "@/app/hooks/useUser";
+import useUser from "app/hooks/useUser";
 import toast from "react-hot-toast";
 import { Input } from "@/components/ui/input";
 

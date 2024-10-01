@@ -1,7 +1,7 @@
 "use client";
 import { useRouter } from "next/navigation";
 import { SubmitHandler, useForm } from "react-hook-form";
-import useUser from "@/app/hooks/useUser";
+import useUser from "app/hooks/useUser";
 import { Input } from "@/components/ui/input";
 import toast from "react-hot-toast";
 import { useState } from "react";

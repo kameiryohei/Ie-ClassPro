@@ -1,6 +1,6 @@
 import { headers } from "next/headers";
 import UpdatePageCore from "./components/UpdatePageCore";
-import { config } from "@/lib/config";
+import { config } from "lib/config";
 
 async function getDetailData(id: number, host: string) {
   const res = await fetch(`${config.apiPrefix}${host}/api/plan/update/${id}`);

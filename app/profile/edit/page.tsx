@@ -1,5 +1,5 @@
 "use client";
-import useUser from "@/app/hooks/useUser";
+import useUser from "app/hooks/useUser";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -11,7 +11,7 @@ import { FormData } from "./types/EditType";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { MdChevronLeft } from "react-icons/md";
-import NotAllowPage from "@/app/components/NotAllowPage";
+import NotAllowPage from "app/components/NotAllowPage";
 
 const EditProfile = async (
   name: string,

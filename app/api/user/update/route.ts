@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import prisma from "@/utils/prisma/prismaClient";
+import prisma from "utils/prisma/prismaClient";
 
 // username更新用API
 export const PUT = async (req: Request, res: NextResponse) => {
