@@ -43,13 +43,14 @@ const CourseReview = ({ id }: CourseReviewProps) => {
           "Content-Type": "application/json",
         },
       });
-      console.log(res);
+      if (!res.ok) {
+        toast.error("エラーが発生しました");
+      }
       setIsLoading(false);
       toast.success("投稿しました");
       router.push("/allPost");
       router.refresh();
     } catch (error) {
-      console.error("Error:", error);
       toast.error("投稿に失敗しました");
     }
   };

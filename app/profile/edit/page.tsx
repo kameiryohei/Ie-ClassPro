@@ -69,10 +69,7 @@ const EditPage = () => {
         setIsLoading(false);
       } else {
         toast.error("プロフィールの更新に失敗しました");
-        console.error(res);
       }
-    } else {
-      console.error("session.user.id is null");
     }
   };
 

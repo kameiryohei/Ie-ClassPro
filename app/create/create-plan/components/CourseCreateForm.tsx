@@ -61,7 +61,6 @@ const CourseCreateForm = ({ planId }: CourseCreateFormProps) => {
       setIsLoading(false);
       router.refresh();
     } catch (error) {
-      console.error("Error:", error);
       toast.error("エラーが発生しました。");
       setIsLoading(false);
     }

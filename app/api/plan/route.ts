@@ -2,7 +2,7 @@ import prisma from "utils/prisma/prismaClient";
 import { NextResponse } from "next/server";
 
 // Plan投稿用API
-export const POST = async (req: Request, res: NextResponse) => {
+export const POST = async (req: Request) => {
   try {
     const { title, content, userId } = await req.json();
 
@@ -25,7 +25,7 @@ export const POST = async (req: Request, res: NextResponse) => {
   }
 };
 //plan投稿を全て取得するAPI
-export const GET = async (req: Request, res: NextResponse) => {
+export const GET = async () => {
   try {
     await prisma.$connect();
     const posts = await prisma.plan.findMany({
@@ -47,7 +47,7 @@ export const GET = async (req: Request, res: NextResponse) => {
 };
 
 //plan投稿を1つ更新するAPI
-export const PUT = async (req: Request, res: NextResponse) => {
+export const PUT = async (req: Request) => {
   try {
     const { id, title, content } = await req.json();
 

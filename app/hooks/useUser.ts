@@ -32,7 +32,6 @@ export default function useUser() {
 
   function signUp({ email, password }: { email: string; password: string }) {
     return supabase.auth.signUp({ email, password }).catch((error) => {
-      console.error("Sign up failed:", error);
       return error;
     });
   }
@@ -41,7 +40,6 @@ export default function useUser() {
     return supabase.auth
       .signInWithPassword({ email, password })
       .catch((error) => {
-        console.error("Sign in failed:", error);
         return error;
       });
   }

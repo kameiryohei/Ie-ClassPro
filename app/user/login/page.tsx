@@ -32,7 +32,6 @@ const LoginPage = () => {
       });
       if (error) {
         // エラー時の処理
-        console.error(error);
         toast.error("メールアドレス、もしくはパスワードが違います");
         setLoading(false);
       } else {
@@ -42,7 +41,6 @@ const LoginPage = () => {
         setLoading(false);
       }
     } catch (error) {
-      console.error(error);
       toast.error("予期せぬエラーが発生しました");
       setLoading(false);
     }

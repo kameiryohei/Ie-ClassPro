@@ -19,7 +19,6 @@ const SpecificCourseCore = ({
   id,
   title,
   content,
-  userId,
 }: SpecificCourseDataProps) => {
   return (
     <div className="border-2 rounded-xl border-slate-200  shadow-2xl">
