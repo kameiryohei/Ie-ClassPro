@@ -3,7 +3,7 @@ import prisma from "utils/prisma/prismaClient";
 
 // 自分が作成したプランを削除するAPI
 
-export const DELETE = async (req: Request, res: NextResponse) => {
+export const DELETE = async (req: Request) => {
   try {
     const { planId } = await req.json();
 

@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import prisma from "utils/prisma/prismaClient";
 
-export const GET = async (req: Request, res: NextResponse) => {
+export const GET = async (req: Request) => {
   const auth_id: string = req.url.split("/user/")[1];
 
   try {

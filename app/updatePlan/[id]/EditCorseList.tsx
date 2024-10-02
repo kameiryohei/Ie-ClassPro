@@ -35,14 +35,11 @@ const EditCorseList = ({ id, name, content }: EditCorseListProps) => {
       if (data.error) {
         throw new Error(data.error);
       }
-      console.log(data);
       toast.success(`教科名：${data.post.name}を削除しました`);
 
       setIsOpen(false);
     } catch (error) {
       toast.error("投稿の削除に失敗しました");
-
-      console.error(error);
     }
   }
 
@@ -75,8 +72,6 @@ const EditCorseList = ({ id, name, content }: EditCorseListProps) => {
     } catch (error) {
       toast.error("投稿の削除に失敗しました");
       setIsLoading(false);
-
-      console.error(error);
     }
   }
 

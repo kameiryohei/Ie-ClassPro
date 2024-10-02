@@ -63,8 +63,6 @@ const UpdatePageCore = ({
     } catch (error) {
       toast.error("投稿の削除に失敗しました");
       setIsLoading(false);
-
-      console.error(error);
     }
   }
 

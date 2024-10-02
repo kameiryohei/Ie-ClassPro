@@ -33,7 +33,6 @@ const RegisterPage = () => {
       );
       router.push("/");
     } catch (error) {
-      console.error(error);
       toast.error("エラーが発生しました");
       setLoading(false);
     }

@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import prisma from "utils/prisma/prismaClient";
 
 // username更新用API
-export const PUT = async (req: Request, res: NextResponse) => {
+export const PUT = async (req: Request) => {
   try {
     const { name, auth_id, university, faculty, department, grade } =
       await req.json();
@@ -32,7 +32,7 @@ export const PUT = async (req: Request, res: NextResponse) => {
 };
 
 //ユーザーを削除するAPI
-export const DELETE = async (req: Request, res: NextResponse) => {
+export const DELETE = async (req: Request) => {
   try {
     const { auth_id } = await req.json();
     await prisma.$connect();

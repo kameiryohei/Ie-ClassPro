@@ -48,7 +48,6 @@ const CourseCreateForm = ({ planId }: AddCourseProps) => {
           "Content-Type": "application/json",
         },
       });
-      console.log(res);
       if (!res.ok) {
         throw new Error("エラーが発生しました");
       }
@@ -56,7 +55,6 @@ const CourseCreateForm = ({ planId }: AddCourseProps) => {
       router.back();
       router.refresh;
     } catch (error) {
-      console.error("Error:", error);
       toast.error("エラーが発生しました。もう一度お試しください。");
     }
   };

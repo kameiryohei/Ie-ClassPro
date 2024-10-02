@@ -35,7 +35,6 @@ const DeleteCourse = ({ planId }: DeleteCourseProps) => {
       router.refresh();
     } catch (error) {
       toast.error("投稿の削除に失敗しました");
-      console.error(error);
     }
   };
   const [isOpen, setIsOpen] = useState(false);

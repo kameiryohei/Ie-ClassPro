@@ -1,9 +1,8 @@
 import { NextResponse } from "next/server";
 import prisma from "utils/prisma/prismaClient";
-import { CourseType } from "app/allPost/[id]/types/Course";
 
 //編集画面で教科を削除するための関数　app/updatePlan/[id]/EditCorseList.tsxで使用
-export const DELETE = async (req: Request, res: NextResponse) => {
+export const DELETE = async (req: Request) => {
   try {
     const { courseId } = await req.json();
 
@@ -25,7 +24,7 @@ export const DELETE = async (req: Request, res: NextResponse) => {
 };
 
 //編集画面で教科を編集するための関数　app/updatePlan/[id]/page.tsxで使用
-export const PUT = async (req: Request, res: NextResponse) => {
+export const PUT = async (req: Request) => {
   try {
     const { courseId, name, content } = await req.json();
 

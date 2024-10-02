@@ -58,7 +58,6 @@ const PlanCreate = () => {
       router.push(href);
       setIsLoading(false);
     } catch (error) {
-      console.error("Error:", error);
       toast.error("エラーが発生しました。もう一度お試しください。");
     }
   };

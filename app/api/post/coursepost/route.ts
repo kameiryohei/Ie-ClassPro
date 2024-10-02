@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import prisma from "utils/prisma/prismaClient";
 
-export const POST = async (req: Request, res: NextResponse) => {
+export const POST = async (req: Request) => {
   try {
     const { title, id, authorId } = await req.json();
 
