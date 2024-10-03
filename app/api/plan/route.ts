@@ -1,6 +1,5 @@
 import prisma from "utils/prisma/prismaClient";
 import { NextResponse } from "next/server";
-import { corsHeaders } from "../cors";
 
 // Plan投稿用API
 export const POST = async (req: Request) => {
@@ -39,10 +38,7 @@ export const GET = async () => {
         },
       },
     });
-    return NextResponse.json(
-      { message: "Success", posts },
-      { headers: corsHeaders }
-    );
+    return NextResponse.json({ message: "Success", posts });
   } catch (error) {
     return NextResponse.json({ message: "Error", error }, { status: 501 });
   } finally {
