@@ -61,6 +61,7 @@ const ProfileDrawer = ({ isOpen, onClose }: ProfileDrawerProps) => {
                           <nav
                             className="mt-6 flex flex-col items-center space-y-6 text-lg font-medium text-neutral-600"
                             onClick={onClose}
+                            aria-hidden="true"
                           >
                             <Link
                               href="/"
