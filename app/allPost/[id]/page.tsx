@@ -9,7 +9,7 @@ import ReviewSection from "./components/ReviewSection";
 
 async function getDetailData(id: number, host: string) {
   const res = await fetch(`${config.apiPrefix}${host}/api/plan/${id}`, {
-    cache: "no-cache", //ssr
+    cache: "no-store", //ssr
   });
   const data = await res.json();
   return data;
