@@ -60,52 +60,71 @@ const ProfileDrawer = ({ isOpen, onClose }: ProfileDrawerProps) => {
                           </div>
                           <nav
                             className="mt-6 flex flex-col items-center space-y-6 text-lg font-medium text-neutral-600"
-                            onClick={onClose}
-                            aria-hidden="true"
+                            aria-label="メインナビゲーション"
                           >
-                            <Link
-                              href="/"
-                              className="border-b-4 border-b-orange-500"
-                            >
-                              ホーム
-                            </Link>
-                            <Link
-                              href="/allPost"
-                              className="border-b-4 border-b-orange-500"
-                            >
-                              全ての投稿を見る
-                            </Link>
-                            {session ? (
-                              <>
+                            <ul className="flex flex-col items-center space-y-6 p-0 m-0 list-none">
+                              <li>
                                 <Link
-                                  href="/profile"
-                                  className="border-b-4 border-b-orange-500"
+                                  href="/"
+                                  className="border-b-4 border-b-orange-500 p-2"
+                                  onClick={onClose}
                                 >
-                                  マイページ
+                                  ホーム
                                 </Link>
+                              </li>
+                              <li>
                                 <Link
-                                  href="/create"
-                                  className="border-b-4 border-b-orange-500"
+                                  href="/allPost"
+                                  className="border-b-4 border-b-orange-500 p-2"
+                                  onClick={onClose}
                                 >
-                                  履修プランを投稿する
+                                  全ての投稿を見る
                                 </Link>
-                              </>
-                            ) : (
-                              <>
-                                <Link
-                                  href="/user/login"
-                                  className="border-b-4 border-b-orange-500"
-                                >
-                                  ログイン
-                                </Link>
-                                <Link
-                                  href="/user/register"
-                                  className="border-b-4 border-b-orange-500"
-                                >
-                                  新規登録
-                                </Link>
-                              </>
-                            )}
+                              </li>
+                              {session ? (
+                                <>
+                                  <li>
+                                    <Link
+                                      href="/profile"
+                                      className="border-b-4 border-b-orange-500 p-2"
+                                      onClick={onClose}
+                                    >
+                                      マイページ
+                                    </Link>
+                                  </li>
+                                  <li>
+                                    <Link
+                                      href="/create"
+                                      className="border-b-4 border-b-orange-500 p-2"
+                                      onClick={onClose}
+                                    >
+                                      履修プランを投稿する
+                                    </Link>
+                                  </li>
+                                </>
+                              ) : (
+                                <>
+                                  <li>
+                                    <Link
+                                      href="/user/login"
+                                      className="border-b-4 border-b-orange-500 p-2"
+                                      onClick={onClose}
+                                    >
+                                      ログイン
+                                    </Link>
+                                  </li>
+                                  <li>
+                                    <Link
+                                      href="/user/register"
+                                      className="border-b-4 border-b-orange-500 p-2"
+                                      onClick={onClose}
+                                    >
+                                      新規登録
+                                    </Link>
+                                  </li>
+                                </>
+                              )}
+                            </ul>
                           </nav>
                         </div>
                         <div className="flex justify-center">
