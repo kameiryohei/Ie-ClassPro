@@ -1,9 +1,11 @@
-import useUser from "app/hooks/useUser";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 
-const LogoutButton = () => {
-  const { signOut } = useUser();
+interface LogoutButtonProps {
+  signOut: () => void;
+}
+
+const LogoutButton = ({ signOut }: LogoutButtonProps) => {
   const router = useRouter();
 
   const logOut = () => {

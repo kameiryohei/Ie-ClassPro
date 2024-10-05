@@ -7,7 +7,7 @@ import LogoutButton from "./LogoutButton";
 import NotAllowPage from "app/components/NotAllowPage";
 
 const ProfileContent = () => {
-  const { user, isLoading, session } = useUser();
+  const { user, isLoading, session, signOut } = useUser();
   const id = user?.id;
 
   if (!session) {
@@ -50,7 +50,7 @@ const ProfileContent = () => {
           <Link href={`/create/editplan/${id}`}>過去のプランを編集・削除</Link>
         </button>
       </div>
-      <LogoutButton />
+      <LogoutButton signOut={signOut} />
     </>
   );
 };
