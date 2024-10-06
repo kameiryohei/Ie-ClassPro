@@ -1,16 +1,12 @@
-import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
 import NotAllowPage from "app/components/NotAllowPage";
 
-describe("NotAllowPage", () => {
-  it("renders without crashing", () => {
+// アクセス権限がないページの表示テスト
+describe("<NotAllowPage/>", () => {
+  test("アクセスできないことを示す文章が正しく表示されるかのテスト", () => {
     render(<NotAllowPage />);
-  });
-
-  it("displays the error message correctly", () => {
-    render(<NotAllowPage />);
-    const errorMessage =
-      screen.getByText(/このページにはアクセスできません！/i);
-    expect(errorMessage).toBeInTheDocument();
+    expect(
+      screen.getByText("このページにはアクセスできません！")
+    ).toBeInTheDocument();
   });
 });
