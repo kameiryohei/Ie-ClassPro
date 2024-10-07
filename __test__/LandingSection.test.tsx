@@ -20,12 +20,16 @@ describe("<LandingSection />", () => {
     ).toBeInTheDocument();
   });
 
-  test("最初のサブタイトルとテキストがレンダリングされる", async () => {
+  test("各サブタイトルとテキストがレンダリングされる", async () => {
     await act(async () => {
       render(<LandingSection data={mockData} />);
     });
     expect(screen.getByText(mockData.subTitle1 || "")).toBeInTheDocument();
     expect(screen.getByText(mockData.text1)).toBeInTheDocument();
+    expect(screen.getByText(mockData.subTitle2 || "")).toBeInTheDocument();
+    expect(screen.getByText(mockData.text2)).toBeInTheDocument();
+    expect(screen.getByText(mockData.subTitle3 || "")).toBeInTheDocument();
+    expect(screen.getByText(mockData.text3)).toBeInTheDocument();
   });
 
   test("最後のメッセージがレンダリングされる", async () => {

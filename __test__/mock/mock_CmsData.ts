@@ -14,8 +14,8 @@ export const mockData: CmsData = {
   title: "履修プランを考えることをもっと楽に",
   applicationName: "ClassPlannner",
   subTitle1: "1. 登録",
-  subTitle2: " 2. 履修プランを投稿",
-  subTitle3: "  3. 履修プランを更新",
+  subTitle2: "2. 履修プランを投稿",
+  subTitle3: "3. 履修プランを更新",
   lastMessage: "今すぐ「ClassPlannner」をお試しください!",
   img1: {
     url: "https://images.microcms-assets.io/assets/1a2e596f4f604b99b756f320188ead42/d3f3f78d97934d0493d387d41ba7c9f3/image1.svg",
