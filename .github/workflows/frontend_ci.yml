@@ -8,6 +8,14 @@ on:
     branches:
       - main
 
+env:
+  NEXT_PUBLIC_SUPABASE_URL: ${{secrets.NEXT_PUBLIC_SUPABASE_URL}}
+  NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY}}
+  MICROCMS_API_KEY: ${{secrets.MICROCMS_API_KEY}}
+  MICROCMS_API_DOMAIN: ${{secrets.MICROCMS_API_DOMAIN}}
+  DATABASE_URL: ${{secrets.DATABASE_URL}}
+  API_PREFIX: ${{secrets.API_PREFIX}}
+
 jobs:
   build:
     runs-on: ubuntu-latest
