@@ -8,6 +8,14 @@ on:
     branches:
       - main
 
+env:
+  NEXT_PUBLIC_SUPABASE_URL: ${{secrets.NEXT_PUBLIC_SUPABASE_URL}}
+  NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY}}
+  MICROCMS_API_KEY: ${{secrets.MICROCMS_API_KEY}}
+  MICROCMS_API_DOMAIN: ${{secrets.MICROCMS_API_DOMAIN}}
+  DATABASE_URL: ${{secrets.DATABASE_URL}}
+  API_PREFIX: ${{secrets.API_PREFIX}}
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -24,16 +32,6 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-
-      - name: Set environment variables
-        run: |
-          echo "NEXT_PUBLIC_SUPABASE_URL=${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}" >> $GITHUB_ENV
-          echo "NEXT_PUBLIC_SUPABASE_ANON_KEY=${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}" >> $GITHUB_ENV
-          echo "DATABASE_URL=${{ secrets.DATABASE_URL }}" >> $GITHUB_ENV
-          echo "API_PREFIX=${{ secrets.API_PREFIX }}" >> $GITHUB_ENV
-          echo "MICROCMS_API_DOMAIN=${{ secrets.MICROCMS_API_DOMAIN }}" >> $GITHUB_ENV
-          echo "MICROCMS_API_KEY=${{ secrets.MICROCMS_API_KEY }}" >> $GITHUB_ENV
-          echo "NEXT_PUBLIC_VERCEL_URL=${{ secrets.NEXT_PUBLIC_VERCEL_URL }}" >> $GITHUB_ENV
 
       - name: Install dependencies
         run: npm install
