@@ -45,10 +45,28 @@ describe("<LandingSection />", () => {
     });
 
     const imageElement = screen.getByAltText("Home");
+    const imageElement_img1 = screen.getByAltText("Image 1");
+    const imageElement_img2 = screen.getByAltText("Image 2");
+    const imageElement_img3 = screen.getByAltText("Image 3");
 
     expect(imageElement).toHaveAttribute("src");
     expect(imageElement.getAttribute("src")).toContain(
       encodeURIComponent(mockData.icon?.url ?? "")
+    );
+
+    expect(imageElement_img1).toHaveAttribute("src");
+    expect(imageElement_img1.getAttribute("src")).toContain(
+      mockData.img1?.url ?? ""
+    );
+
+    expect(imageElement_img2).toHaveAttribute("src");
+    expect(imageElement_img2.getAttribute("src")).toContain(
+      mockData.img2?.url ?? ""
+    );
+
+    expect(imageElement_img3).toHaveAttribute("src");
+    expect(imageElement_img3.getAttribute("src")).toContain(
+      mockData.img3?.url ?? ""
     );
   });
 });

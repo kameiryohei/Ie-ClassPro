@@ -41,7 +41,7 @@ const LandingSection = ({ data }: LandingSectionProps) => {
               </p>
               <Image
                 src={data.img2?.url ?? ""}
-                alt="Register"
+                alt="Image 2"
                 width={300}
                 height={600}
                 className="pt-4"
@@ -60,7 +60,7 @@ const LandingSection = ({ data }: LandingSectionProps) => {
             <div className="flex justify-center gap-x-8 flex-col lg:flex-row items-center">
               <Image
                 src={data.img1?.url ?? ""}
-                alt="Register"
+                alt="Image 1"
                 width={300}
                 height={300}
                 className="pt-4 mx-auto rounded-full"
@@ -85,7 +85,7 @@ const LandingSection = ({ data }: LandingSectionProps) => {
               </p>
               <Image
                 src={data.img3?.url ?? ""}
-                alt="Register"
+                alt="Image 3"
                 width={300}
                 height={300}
                 className="pt-4 mx-auto rounded-full"
