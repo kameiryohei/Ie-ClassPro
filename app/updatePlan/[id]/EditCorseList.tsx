@@ -23,6 +23,7 @@ const EditCorseList = ({ id, name, content }: EditCorseListProps) => {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
+          "x-api-key": process.env.NEXT_PUBLIC_API_KEY || "",
         },
         body: JSON.stringify({ courseId }),
       });
@@ -54,6 +55,7 @@ const EditCorseList = ({ id, name, content }: EditCorseListProps) => {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
+          "x-api-key": process.env.NEXT_PUBLIC_API_KEY || "",
         },
         body: JSON.stringify({ courseId, name, content }),
       });

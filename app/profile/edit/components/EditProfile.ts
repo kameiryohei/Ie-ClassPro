@@ -12,6 +12,7 @@ export const EditProfile = async (
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
+      "x-api-key": process.env.NEXT_PUBLIC_API_KEY || "",
     },
     body: JSON.stringify({
       name,

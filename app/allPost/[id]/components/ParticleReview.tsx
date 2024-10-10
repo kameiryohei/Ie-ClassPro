@@ -11,6 +11,8 @@ async function getReviewData(id: number, host: string) {
     `${config.apiPrefix}${host}/api/post/coursepost/${id}`,
     {
       cache: "no-store", //ssr
+      method: "GET",
+      headers: { "x-api-key": process.env.NEXT_PUBLIC_API_KEY || "" },
     }
   );
   const data = await res.json();

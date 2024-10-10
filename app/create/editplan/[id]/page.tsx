@@ -5,6 +5,8 @@ import EditPlanCore from "./components/EditPlanCore";
 async function getDetailCourseData(id: number, host: string) {
   const res = await fetch(`${config.apiPrefix}${host}/api/plan/detail/${id}`, {
     cache: "no-store", //ssr
+    method: "GET",
+    headers: { "x-api-key": process.env.NEXT_PUBLIC_API_KEY || "" },
   });
   const data = await res.json();
   return data.plans;
