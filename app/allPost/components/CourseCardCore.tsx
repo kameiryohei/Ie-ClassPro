@@ -8,6 +8,8 @@ async function getAllCoursesDate(host: string) {
     next: {
       revalidate: 3600, //ISRを一時間に設定
     },
+    method: "GET",
+    headers: { "x-api-key": process.env.NEXT_PUBLIC_API_KEY || "" },
   });
   const data = await res.json();
   return data.posts;

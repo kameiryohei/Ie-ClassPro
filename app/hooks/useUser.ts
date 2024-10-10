@@ -6,7 +6,13 @@ import { UserType } from "./types/UserType";
 import useSWR from "swr";
 
 async function fetcher(url: string) {
-  return fetch(url).then((res) => res.json());
+  const res = await fetch(url, {
+    headers: {
+      "Content-Type": "application/json",
+      "x-api-key": process.env.NEXT_PUBLIC_API_KEY || "",
+    },
+  });
+  return res.json();
 }
 
 export default function useUser() {

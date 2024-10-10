@@ -17,6 +17,7 @@ const DeleteCourse = ({ planId }: DeleteCourseProps) => {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
+          "x-api-key": process.env.NEXT_PUBLIC_API_KEY || "",
         },
         body: JSON.stringify({ planId }),
       });
