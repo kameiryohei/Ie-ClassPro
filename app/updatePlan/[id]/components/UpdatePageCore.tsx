@@ -12,7 +12,7 @@ import useUser from "app/hooks/useUser";
 import { UserType } from "app/hooks/types/UserType";
 import NotAllowPage from "app/components/NotAllowPage";
 
-interface UpdatePageCoreProps {
+export interface UpdatePageCoreProps {
   paramsId: number;
   title: string;
   content: string;
