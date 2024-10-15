@@ -9,6 +9,7 @@ export const GET = async (req: NextRequest) => {
     const user = await prisma.user.findUnique({
       where: { auth_id },
       select: {
+        id: true,
         name: true,
         email: true,
         university: true,
