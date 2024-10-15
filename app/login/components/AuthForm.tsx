@@ -28,7 +28,14 @@ const AuthForm = () => {
         </h1>
 
         {state.message && (
-          <div className="text-red-600 text-sm" aria-live="polite">
+          <div
+            className={`text-sm ${
+              state.message.includes("登録確認")
+                ? "text-green-600"
+                : "text-red-600"
+            }`}
+            aria-live="polite"
+          >
             {state.message}
           </div>
         )}
@@ -100,7 +107,6 @@ const AuthForm = () => {
           {isLogin ? "ログイン" : "新規登録"}
         </Button>
         <Button
-          className="w-full"
           variant="link"
           type="button"
           onClick={() => setIsLogin(!isLogin)}
