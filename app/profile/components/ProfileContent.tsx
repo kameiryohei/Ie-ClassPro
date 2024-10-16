@@ -4,7 +4,7 @@ import { headers } from "next/headers";
 import ProfileCard from "./ProfileCard";
 import ProfileOptionsCard from "./ProfileOptionsCard";
 
-async function getUserDate(host: string, id: string) {
+export async function getUserDate(host: string, id: string) {
   const res = await fetch(`${config.apiPrefix}${host}/api/auth/${id}`, {
     cache: "no-store",
     method: "GET",
