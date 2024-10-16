@@ -2,6 +2,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Edit3, LogOut, Star, Trash2 } from "lucide-react";
+import { singOut } from "app/login/actions";
 
 const ProfileOptionsCard = ({ id }: { id: number }) => {
   return (
@@ -14,6 +15,7 @@ const ProfileOptionsCard = ({ id }: { id: number }) => {
           asChild
           className="w-full justify-start hover:bg-blue-100"
           variant="ghost"
+          aria-label="プロフィールを編集する"
         >
           <Link href="/profile/edit">
             <Edit3 className="mr-2 h-4 w-4" />
@@ -24,6 +26,7 @@ const ProfileOptionsCard = ({ id }: { id: number }) => {
           asChild
           className="w-full justify-start hover:bg-blue-100"
           variant="ghost"
+          aria-label="自分の過去のレビューを見る"
         >
           <Link href="/post">
             <Star className="mr-2 h-4 w-4" />
@@ -34,22 +37,23 @@ const ProfileOptionsCard = ({ id }: { id: number }) => {
           asChild
           className="w-full justify-start hover:bg-blue-100"
           variant="ghost"
+          aria-label="過去のプランを編集・削除"
         >
           <Link href={`/create/editplan/${id}`}>
             <Trash2 className="mr-2 h-4 w-4" />
             過去のプランを編集・削除
           </Link>
         </Button>
-        <Button
-          asChild
-          className="w-full justify-start text-red-600 hover:text-red-600 hover:bg-red-100"
-          variant="ghost"
-        >
-          <Link href="/logout">
+        <form action={singOut}>
+          <Button
+            className="w-full justify-start text-red-600 hover:text-red-600 hover:bg-red-100"
+            variant="ghost"
+            aria-label="ログアウト"
+          >
             <LogOut className="mr-2 h-4 w-4" />
             ログアウト
-          </Link>
-        </Button>
+          </Button>
+        </form>
       </CardContent>
     </Card>
   );
