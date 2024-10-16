@@ -3,26 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { createClient } from "utils/supabase/sever";
-import { z } from "zod";
-
-// zodスキーマの定義
-const loginSchema = z.object({
-  email: z
-    .string()
-    .email({ message: "有効なメールアドレスを入力してください。" }),
-  password: z
-    .string()
-    .min(6, { message: "パスワードは6文字以上で入力してください。" }),
-});
-
-const signupSchema = loginSchema
-  .extend({
-    "confirm-password": z.string(),
-  })
-  .refine((data) => data.password === data["confirm-password"], {
-    message: "パスワードが一致しません",
-    path: ["confirm-password"],
-  });
+import { loginSchema, signupSchema } from "./validate";
 
 type AuthState = {
   errors?: {
