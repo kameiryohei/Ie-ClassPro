@@ -10,6 +10,7 @@ export const GET = async (req: NextRequest) => {
       where: { auth_id },
       select: {
         id: true,
+        auth_id: true,
         name: true,
         email: true,
         university: true,
