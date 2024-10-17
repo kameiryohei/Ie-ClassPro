@@ -1,13 +1,9 @@
-"use client";
+import useSeverUser from "app/hooks/useSeverUser";
 import Link from "next/link";
-import { Sling as Hamburger } from "hamburger-react";
-import { useState } from "react";
-import ProfileDrawer from "./ProfileDrawer";
-import useUser from "app/hooks/useUser";
+import HamburgerMenu from "./Modal/HamburgerMenu";
 
-const Header = () => {
-  const [isOpen, setOpen] = useState(false);
-  const { session } = useUser();
+const Header = async () => {
+  const { session } = useSeverUser();
 
   return (
     <div className="fixed top-0 z-10 w-full divide-y border-gray-300 dark:border-gray-800 border-b bg-white shadow-md">
@@ -30,7 +26,7 @@ const Header = () => {
             >
               すべての投稿を見る
             </Link>
-            {session ? (
+            {(await session()) ? (
               <>
                 <Link
                   href="/profile"
@@ -68,10 +64,7 @@ const Header = () => {
               </>
             )}
           </nav>
-          <div className="block lg:hidden">
-            <Hamburger toggled={isOpen} toggle={setOpen} size={30} />
-            <ProfileDrawer isOpen={isOpen} onClose={() => setOpen(false)} />
-          </div>
+          <HamburgerMenu />
         </div>
       </div>
     </div>
