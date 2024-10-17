@@ -1,15 +1,9 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Profile } from "../components/index";
 
 interface ProfileCardProps {
-  data: {
-    name: string;
-    email: string;
-    university: string;
-    faculty: string;
-    department: string;
-    grade: number;
-  };
+  data: Profile;
 }
 
 const ProfileCard = ({ data }: ProfileCardProps) => {

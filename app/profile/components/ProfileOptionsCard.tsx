@@ -4,7 +4,7 @@ import Link from "next/link";
 import { Edit3, LogOut, Star, Trash2 } from "lucide-react";
 import { singOut } from "app/login/actions";
 
-const ProfileOptionsCard = ({ id }: { id: number }) => {
+const ProfileOptionsCard = ({ id }: { id: string }) => {
   return (
     <Card>
       <CardHeader>
