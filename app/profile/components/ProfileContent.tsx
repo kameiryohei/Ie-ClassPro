@@ -3,8 +3,9 @@ import { config } from "lib/config";
 import { headers } from "next/headers";
 import ProfileCard from "./ProfileCard";
 import ProfileOptionsCard from "./ProfileOptionsCard";
+import { Profile } from "../components/index";
 
-export async function getUserDate(host: string, id: string) {
+export async function getUserDate(host: string, id: string): Promise<Profile> {
   const res = await fetch(`${config.apiPrefix}${host}/api/auth/${id}`, {
     cache: "no-store",
     method: "GET",
@@ -19,7 +20,7 @@ const ProfileContent = async () => {
   const userId = await session();
   const host = headers().get("host");
   const data = await getUserDate(host!, userId!);
-  const id = data.id;
+  const id = data.auth_id;
 
   return (
     <div className="container mx-auto p-4 space-y-6">
