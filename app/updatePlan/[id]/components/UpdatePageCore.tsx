@@ -1,11 +1,11 @@
 import { CourseType } from "app/allPost/[id]/types/Course";
-import { IoArrowBackSharp } from "react-icons/io5";
 import EditCorseList from "./EditCorseList";
 import AddCourse from "./AddCourse";
 import { UserType } from "../components/index";
 import UpdatePlanName from "./UpdatePlanName";
 import useSeverUser from "app/hooks/useSeverUser";
 import { redirect } from "next/navigation";
+import PageBackButton from "./PageBackButton";
 
 export interface UpdatePageCoreProps {
   paramsId: string;
@@ -30,10 +30,7 @@ const UpdatePageCore = async ({
 
   return (
     <div className="py-8 px-10 md:px-36 relative">
-      <IoArrowBackSharp
-        size={36}
-        className="absolute top-7 hover:ring-2 hover:ring-orange-500 rounded-full duration-200"
-      />
+      <PageBackButton />
 
       <p className="text-xl font-medium md:text-2xl text-center">
         プラン編集画面
