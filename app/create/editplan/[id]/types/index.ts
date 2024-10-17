@@ -4,3 +4,8 @@ export type SpecificCourseType = {
   content: string;
   userId: number;
 };
+
+export type GetDetailCourseDataResponse = {
+  plans: SpecificCourseType[];
+  auth_id: string;
+};
