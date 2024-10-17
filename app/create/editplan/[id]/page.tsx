@@ -2,7 +2,7 @@ import { headers } from "next/headers";
 import { config } from "lib/config";
 import EditPlanCore from "./components/EditPlanCore";
 
-async function getDetailCourseData(id: number, host: string) {
+async function getDetailCourseData(id: string, host: string) {
   const res = await fetch(`${config.apiPrefix}${host}/api/plan/detail/${id}`, {
     cache: "no-store", //ssr
     method: "GET",
@@ -12,7 +12,7 @@ async function getDetailCourseData(id: number, host: string) {
   return data.plans;
 }
 
-const EditCoursePage = async ({ params }: { params: { id: number } }) => {
+const EditCoursePage = async ({ params }: { params: { id: string } }) => {
   const host = headers().get("host");
   const SpecificCourseDate = await getDetailCourseData(params.id, host!);
 
