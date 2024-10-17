@@ -1,24 +1,22 @@
-"use client";
 import SpecificCourseCore from "./SpecificCourseCore";
-import { SpecificCourseType } from "../types/SpecificCourseType";
+import { GetDetailCourseDataResponse, SpecificCourseType } from "../types";
 import Link from "next/link";
-import useUser from "app/hooks/useUser";
-import NotAllowPage from "app/components/NotAllowPage";
+import useSeverUser from "app/hooks/useSeverUser";
+import { redirect } from "next/navigation";
 
 interface SpecificCourseDateProps {
-  SpecificCourseDate: SpecificCourseType[];
+  SpecificCourseDate: GetDetailCourseDataResponse;
 }
 
-const EditPlanCore = ({ SpecificCourseDate }: SpecificCourseDateProps) => {
-  const { user } = useUser();
-  const currentUserId = user?.id;
-  const userIds = SpecificCourseDate.map((course) => course.userId);
-  const isCurrentUserIdInArray = userIds.includes(currentUserId);
-
-  if (!isCurrentUserIdInArray) {
-    return <NotAllowPage />;
+const EditPlanCore = async ({
+  SpecificCourseDate,
+}: SpecificCourseDateProps) => {
+  const { plans, auth_id } = SpecificCourseDate;
+  const { session } = useSeverUser();
+  const sessionId = await session();
+  if (sessionId !== auth_id) {
+    redirect("/profile");
   }
-
   return (
     <div>
       <div className="px-10 py-4 pb-24 flex flex-col justify-center">
@@ -28,7 +26,7 @@ const EditPlanCore = ({ SpecificCourseDate }: SpecificCourseDateProps) => {
           </span>
         </p>
         <div className="px-4 lg:px-32 mt-4 grid gap-5 grid-cols-1 lg:grid-cols-2">
-          {SpecificCourseDate.map((course: SpecificCourseType) => (
+          {plans.map((course: SpecificCourseType) => (
             <SpecificCourseCore
               key={course.id}
               id={course.id}
