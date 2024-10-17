@@ -10,8 +10,9 @@ export async function GET(
     where: {
       auth_id: auth_id,
     },
-    include: {
+    select: {
       plans: true,
+      auth_id: true,
     },
   });
   return NextResponse.json(CourseDetailData);
