@@ -6,6 +6,7 @@ import UserInfoCard from "./components/UserInfoCard";
 import PlanDetails from "./components/PlanDetails";
 import CourseListSection from "./components/CourseListSection";
 import ReviewSection from "./components/ReviewSection";
+import useSeverUser from "app/hooks/useSeverUser";
 
 async function getDetailData(id: number, host: string) {
   const res = await fetch(`${config.apiPrefix}${host}/api/plan/${id}`, {
@@ -21,6 +22,8 @@ const SpecificPage = async ({ params }: { params: { id: number } }) => {
   const host = headers().get("host");
   const CourseData = await getDetailData(params.id, host!);
   const { title, content, user, courses } = CourseData;
+  const { session } = useSeverUser();
+  const auth_id = await session();
   return (
     <>
       <div className="py-8 px-10 md:px-36 relative">
@@ -58,7 +61,7 @@ const SpecificPage = async ({ params }: { params: { id: number } }) => {
         </div>
 
         {/* レビューセクション */}
-        <ReviewSection id={params.id} />
+        <ReviewSection id={params.id} auth_id={auth_id!} />
       </div>
     </>
   );

@@ -1,5 +1,4 @@
 "use client";
-import useUser from "app/hooks/useUser";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useRouter } from "next/navigation";
@@ -9,8 +8,9 @@ import toast from "react-hot-toast";
 
 interface CourseReviewProps {
   id: number;
+  auth_id: string;
 }
-const CourseReview = ({ id }: CourseReviewProps) => {
+const CourseReview = ({ id, auth_id }: CourseReviewProps) => {
   const {
     register,
     handleSubmit,
@@ -21,7 +21,6 @@ const CourseReview = ({ id }: CourseReviewProps) => {
       authorId: 0,
     },
   });
-  const { user } = useUser();
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
 
@@ -36,8 +35,8 @@ const CourseReview = ({ id }: CourseReviewProps) => {
         method: "POST",
         body: JSON.stringify({
           title: data.title,
-          id: Number(id),
-          authorId: user?.id,
+          planId: Number(id),
+          auth_id: auth_id,
         }),
         headers: {
           "Content-Type": "application/json",

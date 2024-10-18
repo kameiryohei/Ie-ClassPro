@@ -4,9 +4,23 @@ import { NextResponse } from "next/server";
 // Plan投稿用API
 export const POST = async (req: Request) => {
   try {
-    const { title, content, userId } = await req.json();
+    const { title, content, auth_id } = await req.json();
 
     await prisma.$connect();
+
+    const getUser = await prisma.user.findUnique({
+      where: {
+        auth_id: auth_id,
+      },
+      select: {
+        id: true,
+      },
+    });
+    if (!getUser?.id) {
+      return NextResponse.json({ message: "User not found" }, { status: 404 });
+    }
+    const userId = getUser.id;
+
     const post = await prisma.plan.create({
       data: {
         title,

@@ -1,14 +1,10 @@
 "use client";
 import { useSearchParams } from "next/navigation";
 import CourseCreateForm from "./CourseCreateForm";
-import useUser from "app/hooks/useUser";
-import NotAllowPage from "app/components/NotAllowPage";
 
 const Course = () => {
   const params = useSearchParams();
   const planId = Number(params.get("planId"));
-  const { session } = useUser();
-  if (!session) return <NotAllowPage />;
   return (
     <div>
       <div className="px-2 py-20">
