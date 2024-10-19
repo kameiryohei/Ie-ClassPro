@@ -2,15 +2,15 @@ import { Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { IoClose } from "react-icons/io5";
 import Link from "next/link";
-import useUser from "app/hooks/useUser";
 import Image from "next/image";
+
 interface ProfileDrawerProps {
   isOpen: boolean;
   onClose: () => void;
+  sessionId: string | undefined;
 }
 
-const ProfileDrawer = ({ isOpen, onClose }: ProfileDrawerProps) => {
-  const { session } = useUser();
+const ProfileDrawer = ({ isOpen, onClose, sessionId }: ProfileDrawerProps) => {
   return (
     <div>
       <Transition.Root show={isOpen} as={Fragment}>
@@ -81,7 +81,7 @@ const ProfileDrawer = ({ isOpen, onClose }: ProfileDrawerProps) => {
                                   全ての投稿を見る
                                 </Link>
                               </li>
-                              {session ? (
+                              {sessionId ? (
                                 <>
                                   <li>
                                     <Link
@@ -140,7 +140,7 @@ const ProfileDrawer = ({ isOpen, onClose }: ProfileDrawerProps) => {
                           </Link>
                         </div>
                         <div className="flex justify-center mt-5">
-                          {session ? (
+                          {sessionId ? (
                             <>
                               <button className="px-4 py-2 bg-orange-500 text-white rounded-2xl">
                                 ログイン中です
