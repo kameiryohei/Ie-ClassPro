@@ -4,12 +4,16 @@ import { Sling as Hamburger } from "hamburger-react";
 import ProfileDrawer from "../ProfileDrawer";
 import { useState } from "react";
 
-const HamburgerMenu = () => {
+const HamburgerMenu = ({ sessionId }: { sessionId: string | undefined }) => {
   const [isOpen, setOpen] = useState(false);
   return (
     <div className="block lg:hidden">
       <Hamburger toggled={isOpen} toggle={setOpen} size={30} />
-      <ProfileDrawer isOpen={isOpen} onClose={() => setOpen(false)} />
+      <ProfileDrawer
+        isOpen={isOpen}
+        onClose={() => setOpen(false)}
+        sessionId={sessionId}
+      />
     </div>
   );
 };
