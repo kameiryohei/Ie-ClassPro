@@ -1,6 +1,6 @@
 import CourseCardCore from "./components/CourseCardCore";
 
-const page = () => {
+const CoursePage = () => {
   return (
     <div className="px-10 py-4 flex flex-col justify-center">
       <p className="font-semibold text-center text-3xl">
@@ -15,4 +15,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default CoursePage;
