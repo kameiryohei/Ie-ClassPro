@@ -1,12 +1,13 @@
 import { headers } from "next/headers";
 import { ReviewType } from "../types/ReviewType";
 import { config } from "lib/config";
+import { Review } from ".";
 
 interface ParticleReviewProps {
-  id: number;
+  id: string;
 }
 
-async function getReviewData(id: number, host: string) {
+async function getReviewData(id: string, host: string): Promise<Review> {
   const res = await fetch(
     `${config.apiPrefix}${host}/api/post/coursepost/${id}`,
     {
