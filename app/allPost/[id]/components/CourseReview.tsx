@@ -7,7 +7,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 
 interface CourseReviewProps {
-  id: number;
+  id: string;
   auth_id: string;
 }
 const CourseReview = ({ id, auth_id }: CourseReviewProps) => {

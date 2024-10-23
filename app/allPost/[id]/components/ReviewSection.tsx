@@ -2,7 +2,7 @@ import CourseReview from "./CourseReview";
 import ParticleReview from "./ParticleReview";
 
 interface ReviewSectionProps {
-  id: number;
+  id: string;
   auth_id: string;
 }
 const ReviewSection = ({ id, auth_id }: ReviewSectionProps) => {
