@@ -1,11 +1,13 @@
 import CourseReview from "./CourseReview";
 import ParticleReview from "./ParticleReview";
+import { Post } from "../components/index";
 
 interface ReviewSectionProps {
   id: string;
   auth_id: string;
+  post: Post[];
 }
-const ReviewSection = ({ id, auth_id }: ReviewSectionProps) => {
+const ReviewSection = ({ id, auth_id, post }: ReviewSectionProps) => {
   return (
     <>
       <p className="font-semibold text-center text-2xl">
@@ -15,7 +17,7 @@ const ReviewSection = ({ id, auth_id }: ReviewSectionProps) => {
       </p>
       <div>
         <CourseReview id={id} auth_id={auth_id} />
-        <ParticleReview id={id} />
+        <ParticleReview post={post} />
       </div>
     </>
   );
