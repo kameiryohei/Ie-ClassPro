@@ -1,29 +1,11 @@
-import { headers } from "next/headers";
+import { Post } from ".";
 import { ReviewType } from "../types/ReviewType";
-import { config } from "lib/config";
-import { Review } from ".";
 
 interface ParticleReviewProps {
-  id: string;
+  post: Post[];
 }
 
-async function getReviewData(id: string, host: string): Promise<Review> {
-  const res = await fetch(
-    `${config.apiPrefix}${host}/api/post/coursepost/${id}`,
-    {
-      cache: "no-store", //ssr
-      method: "GET",
-      headers: { "x-api-key": process.env.NEXT_PUBLIC_API_KEY || "" },
-    }
-  );
-  const data = await res.json();
-  return data;
-}
-
-const ParticleReview = async ({ id }: ParticleReviewProps) => {
-  const host = headers().get("host");
-  const ReviewData = await getReviewData(id, host!);
-  const { post } = ReviewData;
+const ParticleReview = async ({ post }: ParticleReviewProps) => {
   return (
     <div className="py-5">
       <p className="text-center text-base md:text-2xl">クチコミ一覧</p>

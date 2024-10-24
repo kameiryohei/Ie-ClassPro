@@ -1,7 +1,7 @@
-import { UserType } from "app/hooks/types/UserType";
+import { User } from ".";
 
 interface UserInfoCardProps {
-  user: UserType;
+  user: User;
 }
 
 const UserInfoCard = ({ user }: UserInfoCardProps) => {

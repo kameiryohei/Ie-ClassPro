@@ -7,8 +7,9 @@ import PlanDetails from "./components/PlanDetails";
 import CourseListSection from "./components/CourseListSection";
 import ReviewSection from "./components/ReviewSection";
 import useSeverUser from "app/hooks/useSeverUser";
+import { PlanDetail } from "./components";
 
-async function getDetailData(id: string, host: string) {
+async function getDetailData(id: string, host: string): Promise<PlanDetail> {
   const res = await fetch(`${config.apiPrefix}${host}/api/plan/${id}`, {
     cache: "no-store", //ssr
     method: "GET",
@@ -21,7 +22,7 @@ async function getDetailData(id: string, host: string) {
 const SpecificPage = async ({ params }: { params: { id: string } }) => {
   const host = headers().get("host");
   const CourseData = await getDetailData(params.id, host!);
-  const { title, content, user, courses } = CourseData;
+  const { title, content, user, courses, post } = CourseData;
   const { session } = useSeverUser();
   const auth_id = await session();
   return (
@@ -61,7 +62,7 @@ const SpecificPage = async ({ params }: { params: { id: string } }) => {
         </div>
 
         {/* レビューセクション */}
-        <ReviewSection id={params.id} auth_id={auth_id!} />
+        <ReviewSection id={params.id} auth_id={auth_id!} post={post} />
       </div>
     </>
   );

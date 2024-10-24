@@ -28,7 +28,7 @@ describe("<CourseReview />", () => {
   });
 
   test("renders the component correctly", () => {
-    render(<CourseReview id={1} auth_id="123" />);
+    render(<CourseReview id={"1"} auth_id="123" />);
     expect(screen.getByText("クチコミを投稿")).toBeInTheDocument();
     expect(
       screen.getByPlaceholderText("ここに入力してください")
@@ -37,7 +37,7 @@ describe("<CourseReview />", () => {
   });
 
   test("shows validation error when submitting empty form", async () => {
-    render(<CourseReview id={1} auth_id="123" />);
+    render(<CourseReview id={"1"} auth_id="123" />);
     fireEvent.click(screen.getByText("投稿する"));
     await waitFor(() => {
       expect(screen.getByText("文字を入力してください")).toBeInTheDocument();
@@ -52,7 +52,7 @@ describe("<CourseReview />", () => {
       })
     ) as jest.Mock;
 
-    render(<CourseReview id={1} auth_id="123" />);
+    render(<CourseReview id={"1"} auth_id="123" />);
     fireEvent.change(screen.getByPlaceholderText("ここに入力してください"), {
       target: { value: "Test Review" },
     });
@@ -72,7 +72,7 @@ describe("<CourseReview />", () => {
       })
     ) as jest.Mock;
 
-    render(<CourseReview id={1} auth_id="123" />);
+    render(<CourseReview id={"1"} auth_id="123" />);
     fireEvent.change(screen.getByPlaceholderText("ここに入力してください"), {
       target: { value: "Test Review" },
     });
@@ -86,7 +86,7 @@ describe("<CourseReview />", () => {
   test("shows error toast when an exception occurs", async () => {
     global.fetch = jest.fn(() => Promise.reject("API is down")) as jest.Mock;
 
-    render(<CourseReview id={1} auth_id="123" />);
+    render(<CourseReview id={"1"} auth_id="123" />);
     fireEvent.change(screen.getByPlaceholderText("ここに入力してください"), {
       target: { value: "Test Review" },
     });
