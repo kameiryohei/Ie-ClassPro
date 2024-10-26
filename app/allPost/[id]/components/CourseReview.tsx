@@ -36,7 +36,7 @@ const CourseReview = ({ id, auth_id }: CourseReviewProps) => {
         body: JSON.stringify({
           title: data.title,
           planId: Number(id),
-          auth_id: auth_id,
+          auth_id: auth_id || null,
         }),
         headers: {
           "Content-Type": "application/json",

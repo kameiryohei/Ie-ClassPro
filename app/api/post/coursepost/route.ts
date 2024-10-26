@@ -7,22 +7,22 @@ export const POST = async (req: Request) => {
 
     await prisma.$connect();
 
-    const author = await prisma.user.findUnique({
-      where: {
-        auth_id: auth_id,
-      },
-      select: {
-        id: true,
-      },
-    });
+    // auth_idがある場合のみユーザーを検索
+    const author = auth_id
+      ? await prisma.user.findUnique({
+          where: { auth_id: auth_id },
+          select: { id: true },
+        })
+      : null;
 
     const post = await prisma.post.create({
       data: {
         title: title,
         planId: planId,
-        authorId: author?.id,
+        authorId: author?.id || null, // authorが見つからない場合またはauth_idが無い場合はnull
       },
     });
+
     return NextResponse.json({ message: "Success", post }, { status: 201 });
   } catch (error) {
     return NextResponse.json(
