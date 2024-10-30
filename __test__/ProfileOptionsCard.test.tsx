@@ -1,7 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { useRouter } from "next/navigation";
 import ProfileOptionsCard from "app/profile/components/ProfileOptionsCard";
-//テス語がpassするけど、エラーが出る
 jest.mock("next/navigation", () => ({
   useRouter: jest.fn(),
 }));
