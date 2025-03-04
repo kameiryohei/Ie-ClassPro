@@ -57,7 +57,6 @@ export function ImageUpload() {
 
         toast.success("画像をアップロードしました");
       } catch (error) {
-        console.error("Error uploading image: ", error);
         toast.error("画像のアップロードに失敗しました");
       } finally {
         setUploading(false);
