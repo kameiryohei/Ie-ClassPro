@@ -15,6 +15,7 @@ env:
   MICROCMS_API_DOMAIN: ${{secrets.MICROCMS_API_DOMAIN}}
   DATABASE_URL: ${{secrets.DATABASE_URL}}
   API_PREFIX: ${{secrets.API_PREFIX}}
+  SUPABASE_DOMAIN: ${{secrets.SUPABASE_DOMAIN}}
 
 jobs:
   build:
