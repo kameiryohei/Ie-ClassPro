@@ -43,21 +43,16 @@ export function ImageUpload() {
           throw uploadError;
         }
 
-        const fetchImageUrl = async (path: string) => {
-          try {
-            const { data, error } = await supabase.storage
-              .from("avatars")
-              .download(path);
-            if (error) throw error;
-            return URL.createObjectURL(data);
-          } catch (error) {
-            console.error("Error downloading image: ", error);
-            toast.error("画像の取得に失敗しました");
-            return null;
-          }
-        };
+        const { data, error } = await supabase.storage
+          .from("avatars")
+          .createSignedUrl(filePath, 600); // 10分間有効
 
-        const url = await fetchImageUrl(filePath);
+        if (error) {
+          toast.error("画像の取得に失敗しました");
+          return;
+        }
+
+        const url = data.signedUrl;
         setImageUrl(url);
 
         toast.success("画像をアップロードしました");
