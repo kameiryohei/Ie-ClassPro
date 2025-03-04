@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/card";
 import Image from "next/image";
 import toast from "react-hot-toast";
+import { v4 as uuidv4 } from "uuid";
 import { createClient } from "utils/supabase/client";
 
 export function ImageUpload() {
@@ -31,7 +32,7 @@ export function ImageUpload() {
         }
 
         const fileExt = file.name.split(".").pop();
-        const fileName = `upload-${Math.random()}.${fileExt}`;
+        const fileName = `upload-${uuidv4()}.${fileExt}`;
         const filePath = fileName;
 
         // 画像をアップロード
